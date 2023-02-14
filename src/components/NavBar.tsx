@@ -21,7 +21,7 @@ export default function NavBar({ menu, className = '', children }: Props) {
 
   return (
     <nav
-      className={`${className} top-0 inset-x-0 fixed bg-gray-50 h-14 z-30 transition-position w-screen lg:w-auto dark:bg-slate-800`}
+      className={`${className} top-0 inset-x-0 fixed bg-gray-50 h-18 z-30 transition-position w-screen lg:w-auto dark:bg-slate-800 pt-3`}
     >
       <div className={`flex lg:items-stretch ${containerMaxW}`}>
         <div className="flex flex-1 items-stretch h-14">{children}</div>

@@ -87,7 +87,7 @@ export default function LayoutAuthenticated({ children }: Props) {
               onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
             >
               <Form>
-                <FormField isBorderless isTransparent>
+                <FormField isTransparent>
                   <Field name="search" placeholder="Search" />
                 </FormField>
               </Form>
