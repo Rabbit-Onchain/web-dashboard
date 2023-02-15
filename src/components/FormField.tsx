@@ -26,7 +26,7 @@ const FormField = ({ icons = [], ...props }: Props) => {
   }
 
   const controlClassName = [
-    'px-3 py-2 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400',
+    'px-3 py-2 max-w-full border-gray-700 rounded-full w-full dark:placeholder-gray-400',
     'focus:ring focus:ring-blue-600 focus:border-blue-600 focus:outline-none',
     props.hasTextareaHeight ? 'h-24' : 'h-12',
     props.isBorderless ? 'border-0' : 'border',

@@ -15,8 +15,8 @@ export default function FooterBar({ children }: Props) {
         <div className="text-center md:text-left mb-6 md:mb-0">
           <b>
             &copy;{year},{` `}
-            <a href="https://justboil.me/" rel="noreferrer" target="_blank">
-              JustBoil.me
+            <a href="https://rabbitonchain.com/" rel="noreferrer" target="_blank">
+              Rabbitonchain.com
             </a>
             .
           </b>
@@ -24,7 +24,7 @@ export default function FooterBar({ children }: Props) {
           {children}
         </div>
         <div className="md:py-2">
-          <a href="https://justboil.me" rel="noreferrer" target="_blank">
+          <a href="https://rabbitonchain.com" rel="noreferrer" target="_blank">
             <JustboilLogo className="w-auto h-8 md:h-6 mx-auto" />
           </a>
         </div>

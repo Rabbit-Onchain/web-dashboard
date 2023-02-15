@@ -21,6 +21,11 @@ const menuAside: MenuAsideItem[] = [
     label: 'Dashboard',
   },
   {
+    href: '/whales',
+    label: 'Whales',
+    icon: mdiTable,
+  },
+  {
     href: '/tables',
     label: 'Tables',
     icon: mdiTable,
@@ -71,18 +76,6 @@ const menuAside: MenuAsideItem[] = [
         label: 'Item Two',
       },
     ],
-  },
-  {
-    href: 'https://github.com/justboil/admin-one-react-tailwind',
-    label: 'GitHub',
-    icon: mdiGithub,
-    target: '_blank',
-  },
-  {
-    href: 'https://github.com/justboil/admin-one-vue-tailwind',
-    label: 'Vue version',
-    icon: mdiVuejs,
-    target: '_blank',
   },
 ]
 

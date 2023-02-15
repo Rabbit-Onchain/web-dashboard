@@ -32,16 +32,16 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
 
   return (
     <aside
-      className={`${className} zzz lg:py-2 lg:pl-2 w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden`}
+      className={`${className} zzz w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden`}
     >
       <div
-        className={`lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900 ${asideStyle}`}
+        className={`flex-1 flex flex-col overflow-hidden dark:bg-slate-900 ${asideStyle}`}
       >
         <div
           className={`flex flex-row h-14 items-center justify-between dark:bg-slate-900 ${asideBrandStyle}`}
         >
           <div className="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-            <b className="font-black">One</b>
+            <b className="font-black">RabbitOnchain</b>
           </div>
           <button
             className="hidden lg:inline-block xl:hidden p-3"
