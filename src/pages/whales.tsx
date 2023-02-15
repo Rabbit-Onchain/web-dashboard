@@ -50,7 +50,7 @@ const Dashboard = () => {
         <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Whales" />
 
         <NotificationBar color="info" icon={mdiMonitorCellphone}>
-          <b>Responsive table.</b> Collapses on mobile
+          We've screened out a bunch of whale addresses to help you keep track of all the significant happenings on-chain
         </NotificationBar>
 
         <CardBox hasTable>
