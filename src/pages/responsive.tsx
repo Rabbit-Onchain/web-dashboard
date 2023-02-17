@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import React, { ReactElement } from 'react'
 import LayoutAuthenticated from '../layouts/Authenticated'
-import SectionMain from '../components/SectionMain'
+import SectionMain from '../components/partials/SectionMain'
 import SectionTitle from '../components/SectionTitle'
 import { appTitle, getPageTitle } from '../config'
 

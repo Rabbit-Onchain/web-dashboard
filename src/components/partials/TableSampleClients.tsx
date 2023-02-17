@@ -1,14 +1,16 @@
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import React, { useState } from 'react'
-import { useSampleClients } from '../hooks/sampleData'
-import { Client } from '../interfaces'
-import BaseButton from './BaseButton'
-import BaseButtons from './BaseButtons'
-import CardBoxModal from './CardBoxModal'
-import UserAvatar from './UserAvatar'
+import { useSampleClients } from '../../hooks/sampleData'
+import { Client } from '../../interfaces'
+import BaseButton from '../ui/BaseButton'
+import BaseButtons from '../ui/BaseButtons'
+import CardBoxModal from '../ui/CardBoxModal'
+import UserAvatar from '../UserAvatar'
 
 const TableSampleClients = () => {
   const { clients } = useSampleClients()
+
+  // get data
 
   const perPage = 5
 
@@ -115,6 +117,7 @@ const TableSampleClients = () => {
           ))}
         </tbody>
       </table>
+      
       <div className="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800">
         <div className="flex flex-col md:flex-row items-center justify-between py-3 md:py-0">
           <BaseButtons>

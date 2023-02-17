@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import { containerMaxW } from '../config'
-import JustboilLogo from './JustboilLogo'
+import { containerMaxW } from '../../config'
+import JustboilLogo from '../JustboilLogo'
 
 type Props = {
   children: ReactNode
