@@ -12,8 +12,8 @@ import FormField from '../components/ui/FormField'
 import FormFilePicker from '../components/ui/FormFilePicker'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/partials/SectionMain'
-import SectionTitle from '../components/SectionTitle'
-import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton'
+import SectionTitle from '../components/ui/SectionTitle'
+import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
 import { getPageTitle } from '../config'
 
 const FormsPage = () => {

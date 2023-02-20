@@ -5,8 +5,8 @@ import { colorsText } from '../../colors'
 import BaseButton from './BaseButton'
 import BaseIcon from './BaseIcon'
 import CardBox from './CardBox'
-import NumberDynamic from '../NumberDynamic'
-import PillTagTrend from '../PillTagTrend'
+import NumberDynamic from './NumberDynamic'
+import PillTagTrend from './PillTagTrend'
 
 type Props = {
   number: number

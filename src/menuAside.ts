@@ -21,6 +21,11 @@ const menuAside: MenuAsideItem[] = [
     label: 'Dashboard',
   },
   {
+    href: '/tokens',
+    label: 'Tokens',
+    icon: mdiPalette,
+  },
+  {
     href: '/whales',
     label: 'Whales',
     icon: mdiTable,

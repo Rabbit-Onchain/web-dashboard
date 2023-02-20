@@ -7,7 +7,7 @@ import CardBoxComponentEmpty from '../components/ui/CardBoxComponentEmpty'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import NotificationBar from '../components/ui/NotificationBar'
 import SectionMain from '../components/partials/SectionMain'
-import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton'
+import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
 import TableSampleClients from '../components/partials/TableSampleClients'
 import { getPageTitle } from '../config'
 

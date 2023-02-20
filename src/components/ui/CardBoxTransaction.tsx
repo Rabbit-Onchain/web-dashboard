@@ -3,7 +3,7 @@ import React from 'react'
 import { Transaction } from '../../interfaces'
 import CardBox from './CardBox'
 import IconRounded from './IconRounded'
-import PillTag from '../PillTag'
+import PillTag from './PillTag'
 
 type Props = {
   transaction: Transaction

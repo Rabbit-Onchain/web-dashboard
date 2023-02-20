@@ -5,8 +5,9 @@ import { Client } from '../../interfaces'
 import BaseButton from '../ui/BaseButton'
 import BaseButtons from '../ui/BaseButtons'
 import CardBoxModal from '../ui/CardBoxModal'
-import UserAvatar from '../UserAvatar'
+import UserAvatar from '../ui/UserAvatar'
 import WhaleService from '../../core/service/whale.service'
+import { truncateAddr } from '../../core/util'
 
 const WhaleList = () => {
   const { clients } = useSampleClients()
@@ -100,7 +101,7 @@ const WhaleList = () => {
         <tbody>
           {whaleData.length > 0 && whaleData.map((client: any) => (
             <tr key={client.id}>
-              <td data-label="Addresse">{client.adr}</td>
+              <td data-label="Addresse">{truncateAddr(client.adr)}</td>
               <td data-label="Net worth">{client.usd_value}</td>
               <td data-label="Top tokens<"></td>
               <td data-label="Top protocols<"></td>

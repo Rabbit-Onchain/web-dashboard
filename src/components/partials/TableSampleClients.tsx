@@ -5,7 +5,7 @@ import { Client } from '../../interfaces'
 import BaseButton from '../ui/BaseButton'
 import BaseButtons from '../ui/BaseButtons'
 import CardBoxModal from '../ui/CardBoxModal'
-import UserAvatar from '../UserAvatar'
+import UserAvatar from '../ui/UserAvatar'
 
 const TableSampleClients = () => {
   const { clients } = useSampleClients()
