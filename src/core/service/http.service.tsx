@@ -28,12 +28,14 @@ export default class HttpService {
     return finalOpts;
   }
 
-  async get(url, opts = null) {
+  async get(url, data, opts = null) {
     opts = Object.assign({}, this.setOptions(opts), {
       method: 'GET'
     });
 
-    const response = await fetch(url, opts);
+    const getParams = new URLSearchParams(data).toString();
+
+    const response = await fetch(url + '?' + getParams, opts);
     return await response.json();
   }
 

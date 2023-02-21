@@ -5,26 +5,34 @@ import { Client } from '../../interfaces'
 import BaseButton from '../ui/BaseButton'
 import BaseButtons from '../ui/BaseButtons'
 import CardBoxModal from '../ui/CardBoxModal'
+import Pagination from '../ui/Pagination'
 import UserAvatar from '../ui/UserAvatar'
 import WhaleService from '../../core/service/whale.service'
-import { truncateAddr } from '../../core/util'
+import { truncateAddr, to$ } from '../../core/util'
 
 const WhaleList = () => {
-  const { clients } = useSampleClients()
   const [whaleData, setWhaleData] = useState([])
-  let numPages = 0
-
+  const [currentPage, setCurrentPage] = useState(0)
+  const [numPages, setNumPages] = useState(0)
+  const [pagesList, setPagesList] = useState([])
+  
   const loadWhales = () => {
-    WhaleService.getWhales()
+    WhaleService.getWhales({
+      page: currentPage
+    })
       .then(
         (result) => {
+          let pages = [];
           console.log(result)
-          console.log(result.whales)
-          numPages = result.totalPage   
-          // setCurrentPage(result.currentPage)
           setWhaleData(result.whales) 
+          setNumPages(result.totalPage)
+          for (let i = 0; i < numPages; i++) {
+            pages.push(i)
+          }
+          setPagesList(pages);
         },
         (error) => {
+          console.log(error);
         }
       )
   };
@@ -34,21 +42,11 @@ const WhaleList = () => {
     loadWhales()
   }, [])
 
-  // get data
-
-  const perPage = 5
-
-  const [currentPage, setCurrentPage] = useState(0)
-
-  // const clientsPaginated = clients.slice(perPage * currentPage, perPage * (currentPage + 1))
-
-  // const numPages = clients.length / perPage
-
-  const pagesList = []
-
-  for (let i = 0; i < numPages; i++) {
-    pagesList.push(i)
-  }
+  useEffect(() => {
+    // if (currentPage )
+    console.log('userEffect change page in list whales now');
+    loadWhales()
+  }, [currentPage])
 
   const [isModalInfoActive, setIsModalInfoActive] = useState(false)
   const [isModalTrashActive, setIsModalTrashActive] = useState(false)
@@ -102,7 +100,7 @@ const WhaleList = () => {
           {whaleData.length > 0 && whaleData.map((client: any) => (
             <tr key={client.id}>
               <td data-label="Addresse">{truncateAddr(client.adr)}</td>
-              <td data-label="Net worth">{client.usd_value}</td>
+              <td data-label="Net worth">{to$(client.usd_value)}</td>
               <td data-label="Top tokens<"></td>
               <td data-label="Top protocols<"></td>
               <td data-label="Last Transaction<"></td>
@@ -110,26 +108,12 @@ const WhaleList = () => {
           ))}
         </tbody>
       </table>
-      
-      <div className="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800">
-        <div className="flex flex-col md:flex-row items-center justify-between py-3 md:py-0">
-          <BaseButtons>
-            {pagesList.map((page) => (
-              <BaseButton
-                key={page}
-                active={page === currentPage}
-                label={page + 1}
-                color={page === currentPage ? 'lightDark' : 'whiteDark'}
-                small
-                onClick={() => setCurrentPage(page)}
-              />
-            ))}
-          </BaseButtons>
-          <small className="mt-6 md:mt-0">
-            Page {currentPage + 1} of {numPages}
-          </small>
-        </div>
-      </div>
+
+      <Pagination
+        totalPages={numPages}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+      />
     </>
   )
 }
