@@ -45,7 +45,7 @@ const Dashboard = () => {
   return (
     <>
       <Head>
-        <title>{getPageTitle('Whales')}</title>
+        <title>{getPageTitle('Tokens')}</title>
       </Head>
       <SectionMain>
         <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Whales" />

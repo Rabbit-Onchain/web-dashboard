@@ -1,6 +1,6 @@
 import { mdiTrendingDown, mdiTrendingNeutral, mdiTrendingUp } from '@mdi/js'
 import React from 'react'
-import { Client } from '../interfaces'
+import { Client } from '../../interfaces'
 import CardBox from './CardBox'
 import PillTag from './PillTag'
 import UserAvatar from './UserAvatar'

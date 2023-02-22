@@ -1,6 +1,6 @@
 import { mdiCashMinus, mdiCashPlus, mdiCreditCard, mdiReceipt } from '@mdi/js'
 import React from 'react'
-import { Transaction } from '../interfaces'
+import { Transaction } from '../../interfaces'
 import CardBox from './CardBox'
 import IconRounded from './IconRounded'
 import PillTag from './PillTag'

@@ -13,6 +13,9 @@
       },
     ],
   },
+  env: {
+    api_url: 'http://localhost:3006/v1/'
+  }
 }
 
 export default nextConfig
