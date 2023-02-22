@@ -1,11 +1,9 @@
 import { mdiEye, mdiTrashCan } from '@mdi/js'
+import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
-import { useSampleClients } from '../../hooks/sampleData'
 import { Client } from '../../interfaces'
-import BaseButton from '../ui/BaseButton'
-import BaseButtons from '../ui/BaseButtons'
-import CardBoxModal from '../ui/CardBoxModal'
 import Pagination from '../ui/Pagination'
+import LoadingBlock from '../ui/LoadingBlock'
 import UserAvatar from '../ui/UserAvatar'
 import WhaleService from '../../core/service/whale.service'
 import { truncateAddr, to$ } from '../../core/util'
@@ -14,24 +12,22 @@ const WhaleList = () => {
   const [whaleData, setWhaleData] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
   const [numPages, setNumPages] = useState(0)
-  const [pagesList, setPagesList] = useState([])
+  const [loading, setLoading] = useState(true)
   
   const loadWhales = () => {
+    setLoading(true)
     WhaleService.getWhales({
       page: currentPage
     })
       .then(
         (result) => {
-          let pages = [];
+          setLoading(false)
           console.log(result)
           setWhaleData(result.whales) 
           setNumPages(result.totalPage)
-          for (let i = 0; i < numPages; i++) {
-            pages.push(i)
-          }
-          setPagesList(pages);
         },
         (error) => {
+          setLoading(false)
           console.log(error);
         }
       )
@@ -56,37 +52,13 @@ const WhaleList = () => {
     setIsModalTrashActive(false)
   }
 
+  const getPercentage = (n, total) => {
+    return Math.floor((n / total) * 100);
+  }
+
   return (
     <>
-      <CardBoxModal
-        title="Sample modal"
-        buttonColor="info"
-        buttonLabel="Done"
-        isActive={isModalInfoActive}
-        onConfirm={handleModalAction}
-        onCancel={handleModalAction}
-      >
-        <p>
-          Lorem ipsum dolor sit amet <b>adipiscing elit</b>
-        </p>
-        <p>This is sample modal</p>
-      </CardBoxModal>
-
-      <CardBoxModal
-        title="Please confirm"
-        buttonColor="danger"
-        buttonLabel="Confirm"
-        isActive={isModalTrashActive}
-        onConfirm={handleModalAction}
-        onCancel={handleModalAction}
-      >
-        <p>
-          Lorem ipsum dolor sit amet <b>adipiscing elit</b>
-        </p>
-        <p>This is sample modal</p>
-      </CardBoxModal>
-
-      <table>
+      <table className='border-blue-300'>
         <thead>
           <tr>
             <th>Address</th>
@@ -97,11 +69,41 @@ const WhaleList = () => {
           </tr>
         </thead>
         <tbody>
-          {whaleData.length > 0 && whaleData.map((client: any) => (
+
+          {loading &&
+            <>
+            <tr>
+              <th colSpan={5}>
+                 <LoadingBlock /> 
+              </th>
+            </tr> 
+            </>
+          }
+          
+          {!loading && whaleData.length > 0 && whaleData.map((client: any) => (
             <tr key={client.id}>
-              <td data-label="Addresse">{truncateAddr(client.adr)}</td>
-              <td data-label="Net worth">{to$(client.usd_value)}</td>
-              <td data-label="Top tokens<"></td>
+              <td data-label="Addresse">
+                <Link href={`/profile/${encodeURIComponent(client.adr)}`}>
+                  {truncateAddr(client.adr)}
+                </Link>
+              </td>
+              <td data-label="Net worth"><b>{to$(client.usd_value)}</b></td>
+              <td data-label="Top tokens">
+                <div>
+                  {client && client['stats'] && client['stats']['top_coins'] &&
+                    client['stats']['top_coins'].map((coin: any, i: number) => {
+                      if (i < 4 && getPercentage(coin.usd_value, client.usd_value) > 0) {
+                        return (
+                          <span key={coin.id} className="p-1 border border-indigo-600 rounded mr-2">
+                              <img className='w-5 inline-block mr-1 align-top' src={coin.logo_url} alt={coin.symbol} />
+                              <span>{getPercentage(coin.usd_value, client.usd_value)} %</span>
+                          </span>
+                        )
+                      }
+                    })  
+                  }  
+                </div>
+              </td>
               <td data-label="Top protocols<"></td>
               <td data-label="Last Transaction<"></td>
             </tr>
