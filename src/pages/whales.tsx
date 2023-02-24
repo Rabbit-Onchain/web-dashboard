@@ -28,20 +28,7 @@ import TableSampleClients from '../components/partials/TableSampleClients'
 import WhaleList from '../components/Whales/List'
 import { getPageTitle } from '../config'
 
-const Dashboard = () => {
-  const { clients } = useSampleClients()
-  const { transactions } = useSampleTransactions()
-
-  const clientsListed = clients.slice(0, 4)
-
-  const [chartData, setChartData] = useState(sampleChartData())
-
-  const fillChartData = (e: React.MouseEvent) => {
-    e.preventDefault()
-
-    setChartData(sampleChartData())
-  }
-
+const Whales = () => {
   return (
     <>
       <Head>
@@ -62,8 +49,8 @@ const Dashboard = () => {
   )
 }
 
-Dashboard.getLayout = function getLayout(page: ReactElement) {
+Whales.getLayout = function getLayout(page: ReactElement) {
   return <LayoutAuthenticated>{page}</LayoutAuthenticated>
 }
 
-export default Dashboard
+export default Whales
