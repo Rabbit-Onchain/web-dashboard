@@ -14,7 +14,7 @@
     ],
   },
   env: {
-    api_url: 'http://localhost:3006/v1/'
+    api_url: 'http://45.32.65.244:3006/v1/'
   }
 }
 
