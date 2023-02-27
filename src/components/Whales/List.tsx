@@ -7,9 +7,7 @@ import LoadingBlock from '../ui/LoadingBlock'
 import UserAvatar from '../ui/UserAvatar'
 import WhaleService from '../../core/service/whale.service'
 import { truncateAddr, to$ } from '../../core/util'
-import { Tooltip } from 'react-tooltip';
-import 'react-tooltip/dist/react-tooltip.css'
-import ReactDOMServer from 'react-dom/server';
+import Tooltip from '../ui/Tooltip'
 
 const WhaleList = () => {
   const [whaleData, setWhaleData] = useState([])
@@ -98,30 +96,30 @@ const WhaleList = () => {
                       if (i < 4 && getPercentage(coin.usd_value, client.usd_value) > 0) {
                         return (
                           <>
-                            <span key={coin.id} data-tooltip-html={ReactDOMServer.renderToStaticMarkup(
-                              <table>
-                                <tr>
-                                  <td>Token</td>
-                                  <td>{coin.symbol}</td>
-                                </tr>
-                                <tr>
-                                  <td>Amount</td>
-                                  <td>{coin.amount}</td>
-                                </tr>
-                                <tr>
-                                  <td>Price</td>
-                                  <td>{to$(coin.price)}</td>
-                                </tr>
-                                <tr>
-                                  <td>Net worth</td>
-                                  <td>{to$(coin.usd_value)}</td>
-                                </tr>
-                              </table>
-                            )} className="my-anchor-element p-1 border border-indigo-600 rounded mr-2">
-                              <img className='w-5 inline-block mr-1 align-top' src={coin.logo_url} alt={coin.symbol} />
-                              <span>{getPercentage(coin.usd_value, client.usd_value)} %</span>
-                            </span>
-                            <Tooltip anchorSelect=".my-anchor-element" />
+                            <Tooltip message={<table>
+                              <tr>
+                                <td>Token</td>
+                                <td>{coin.symbol}</td>
+                              </tr>
+                              <tr>
+                                <td>Amount</td>
+                                <td>{coin.amount}</td>
+                              </tr>
+                              <tr>
+                                <td>Price</td>
+                                <td>{to$(coin.price)}</td>
+                              </tr>
+                              <tr>
+                                <td>Net worth</td>
+                                <td>{to$(coin.usd_value)}</td>
+                              </tr>
+                            </table>}>
+
+                              <span key={coin.id} className="my-anchor-element p-1 border border-indigo-600 rounded mr-2">
+                                <img className='w-5 inline-block mr-1 align-top' src={coin.logo_url} alt={coin.symbol} />
+                                <span>{getPercentage(coin.usd_value, client.usd_value)} %</span>
+                              </span>
+                            </Tooltip>
 
                           </>
                         )
