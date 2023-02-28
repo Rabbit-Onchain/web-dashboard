@@ -1,32 +1,15 @@
 import {
-  mdiAccount,
-  mdiAsterisk,
-  mdiFormTextboxPassword,
-  mdiGithub,
-  mdiMail,
-  mdiUpload,
   mdiSharkFin,
   mdiChartTimelineVariant,
 } from '@mdi/js'
-import { Formik, Form, Field } from 'formik'
 import Head from 'next/head'
 import type { ReactElement } from 'react'
 import React, { useState, useEffect } from 'react'
-import BaseButton from '../../components/ui/BaseButton'
-import BaseButtons from '../../components/ui/BaseButtons'
-import BaseDivider from '../../components/ui/BaseDivider'
-import CardBox from '../../components/ui/CardBox'
-import CardBoxComponentBody from '../../components/ui/CardBoxComponentBody'
-import CardBoxComponentFooter from '../../components/ui/CardBoxComponentFooter'
-import FormField from '../../components/ui/FormField'
-import FormFilePicker from '../../components/ui/FormFilePicker'
 import LayoutAuthenticated from '../../layouts/Authenticated'
 import SectionMain from '../../components/partials/SectionMain'
 import SectionTitleLine from '../../components/partials/profile/SectionTitleLine'
 import CardBoxWidget from '../../components/ui/CardBoxWidget'
 import Tabs from '../../components/ui/Tabs'
-import UserCard from '../../components/ui/UserCard'
-import type { UserForm } from '../../interfaces'
 import { getPageTitle } from '../../config'
 import { useAppSelector } from '../../stores/hooks'
 import { useRouter } from 'next/router'
@@ -78,9 +61,9 @@ const ProfilePage = () => {
           <SectionTitleLine icon={mdiSharkFin} title={adr.toString()} main>
             <div className='w-32'>
               <CardBoxWidget
-                trendLabel="Overflow"
-                trendType="warning"
-                trendColor="warning"
+                trendLabel="12%"
+                trendType="up"
+                trendColor="success"
                 icon={mdiChartTimelineVariant}
                 iconColor="danger"
                 number={parseFloat(whaleData.usd_value)}
@@ -91,7 +74,7 @@ const ProfilePage = () => {
             </div>
           </SectionTitleLine>
 
-          <Tabs color="pink" />
+          <Tabs color="pink" data={whaleData} />
 
         </SectionMain>
 

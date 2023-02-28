@@ -40,8 +40,8 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
         <div
           className={`flex flex-row h-14 items-center justify-between dark:bg-slate-900 ${asideBrandStyle}`}
         >
-          <div className="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-            <b className="font-black">RabbitOnchain</b>
+          <div className="text-center flex justify-between flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0 mt-4">
+            <img src="/static/images/logo1.png" />
           </div>
           <button
             className="hidden lg:inline-block xl:hidden p-3"
@@ -50,8 +50,9 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
             <BaseIcon path={mdiClose} />
           </button>
         </div>
+        
         <div
-          className={`flex-1 overflow-y-auto overflow-x-hidden ${
+          className={`flex-1 overflow-y-auto overflow-x-hidden mt-10 ${
             darkMode ? 'aside-scrollbars-[slate]' : asideScrollbarsStyle
           }`}
         >
