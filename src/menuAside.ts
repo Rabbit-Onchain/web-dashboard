@@ -30,48 +30,53 @@ const menuAside: MenuAsideItem[] = [
     label: 'Whales',
     icon: mdiTable,
   },
+  // {
+  //   href: '/tables',
+  //   label: 'Tables',
+  //   icon: mdiTable,
+  // },
+  // {
+  //   href: '/forms',
+  //   label: 'Forms',
+  //   icon: mdiSquareEditOutline,
+  // },
+  // {
+  //   href: '/ui',
+  //   label: 'UI',
+  //   icon: mdiTelevisionGuide,
+  // },
+  // {
+  //   href: '/responsive',
+  //   label: 'Responsive',
+  //   icon: mdiResponsive,
+  // },
+  // {
+  //   href: '/',
+  //   label: 'Styles',
+  //   icon: mdiPalette,
+  // },
+  // {
+  //    href: '/profile',
+  //    label: 'Profile',
+  //    icon: mdiAccountCircle,
+  // },
+  // {
+  //   href: '/login',
+  //   label: 'Login',
+  //   icon: mdiLock,
+  // },
+  // {
+  //   href: '/error',
+  //   label: 'Error',
+  //   icon: mdiAlertCircle,
+  // },
   {
-    href: '/tables',
-    label: 'Tables',
-    icon: mdiTable,
+     href: '/responsive',
+     label: 'Pro Features',
+     icon: mdiResponsive,
   },
   {
-    href: '/forms',
-    label: 'Forms',
-    icon: mdiSquareEditOutline,
-  },
-  {
-    href: '/ui',
-    label: 'UI',
-    icon: mdiTelevisionGuide,
-  },
-  {
-    href: '/responsive',
-    label: 'Responsive',
-    icon: mdiResponsive,
-  },
-  {
-    href: '/',
-    label: 'Styles',
-    icon: mdiPalette,
-  },
-  {
-    href: '/profile',
-    label: 'Profile',
-    icon: mdiAccountCircle,
-  },
-  {
-    href: '/login',
-    label: 'Login',
-    icon: mdiLock,
-  },
-  {
-    href: '/error',
-    label: 'Error',
-    icon: mdiAlertCircle,
-  },
-  {
-    label: 'Dropdown',
+    label: 'Settings',
     icon: mdiViewList,
     menu: [
       {

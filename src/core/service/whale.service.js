@@ -41,6 +41,16 @@ class WhaleService extends HttpService {
     const res = await this.get(this.url + '/whale/list', data, opts);
     return Promise.resolve(res);
   }
+  
+  /**
+   * @param id
+   * @param opts
+   * @returns {Promise<any>}
+   */
+  async getWhale(data, opts = null) {
+    const res = await this.get(this.url + '/whale/get-whale', data, opts);
+    return Promise.resolve(res);
+  }
 }
 
 export default WhaleService.getInstance();
