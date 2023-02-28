@@ -95,8 +95,9 @@ const WhaleList = () => {
                     client['stats']['top_coins'].map((coin: any, i: number) => {
                       if (i < 4 && getPercentage(coin.usd_value, client.usd_value) > 0) {
                         return (
-                          <>
-                            <Tooltip message={<table>
+
+                          <Tooltip key={coin.id} message={<table>
+                            <tbody>
                               <tr>
                                 <td>Token</td>
                                 <td>{coin.symbol}</td>
@@ -113,15 +114,16 @@ const WhaleList = () => {
                                 <td>Net worth</td>
                                 <td>{to$(coin.usd_value)}</td>
                               </tr>
-                            </table>}>
+                            </tbody>
+                          </table>}>
 
-                              <span key={coin.id} className=" p-1 border border-indigo-600 rounded mr-2">
-                                <img className='w-5 inline-block mr-1 align-top' src={coin.logo_url} alt={coin.symbol} />
-                                <span>{getPercentage(coin.usd_value, client.usd_value)} %</span>
-                              </span>
-                            </Tooltip>
+                            <span key={coin.id} className=" p-1 border border-indigo-600 rounded mr-2">
+                              <img className='w-5 inline-block mr-1 align-top' src={coin.logo_url} alt={coin.symbol} />
+                              <span>{getPercentage(coin.usd_value, client.usd_value)} %</span>
+                            </span>
+                          </Tooltip>
 
-                          </>
+
                         )
                       }
                     })
