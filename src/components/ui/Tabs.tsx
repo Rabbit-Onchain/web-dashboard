@@ -1,5 +1,7 @@
 import React from "react";
 import CardBoxWhaleAsset from "../partials/profile/CardBoxWhaleAsset";
+import CardBox from "./CardBox";
+import { truncateAddr, to$ } from '../../core/util'
 
 export default function({ color, data }) {
   const [openTab, setOpenTab] = React.useState(1);
@@ -74,11 +76,42 @@ export default function({ color, data }) {
               <div className="tab-content tab-space">
                 
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-                    { data && data.stats && data.stats.top_tokens && data.stats.top_tokens.map((token: any) => {
-                        return <CardBoxWhaleAsset key={token.id} token={token} />
-                    })  }
-                    </div>
+                    <CardBox hasTable>
+                        <table className='border-blue-300'>
+                            <thead>
+                                <tr>
+                                    <th>Token</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                    <th>USD Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { data && data.stats && data.stats.top_tokens && data.stats.top_tokens.map((token: any) => {
+                                    // return <CardBoxWhaleAsset key={token.id} token={token} />
+                                    return (
+                                        <tr key={token.id}>
+                                            <td data-label="Token">
+                                                <span>
+                                                    <img className='w-5 inline-block mr-1 align-top' src={token.logo_url} alt={token.symbol} />
+                                                    {token.symbol}
+                                                </span>
+                                            </td>
+                                            <td data-label="Price">
+                                                {to$(token.price)}
+                                            </td>
+                                            <td data-label="Amount">
+                                                {token.amount.toFixed(2)}
+                                            </td>
+                                            <td data-label="USD Value<">
+                                                {to$(token.usd_value)}
+                                            </td>
+                                        </tr>    
+                                    )
+                                }) }
+                            </tbody>
+                        </table>
+                    </CardBox>
                 </div>
                 
                 <div className={openTab === 2 ? "block" : "hidden"} id="link2">
