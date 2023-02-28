@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import BaseDivider from './BaseDivider'
 import BaseIcon from './BaseIcon'
@@ -9,12 +9,15 @@ import NavBarMenuList from './NavBarMenuList'
 import { useAppDispatch, useAppSelector } from '../../stores/hooks'
 import { MenuNavBarItem } from '../../interfaces'
 import { setDarkMode } from '../../stores/styleSlice'
+import { Wallet } from '../../core/service/near-wallet';
+
 
 type Props = {
   item: MenuNavBarItem
 }
 
 export default function NavBarItem({ item }: Props) {
+
   const dispatch = useAppDispatch()
 
   const navBarItemLabelActiveColorStyle = useAppSelector(
@@ -48,22 +51,46 @@ export default function NavBarItem({ item }: Props) {
     }
   }
 
+
+  const [isLogin, setIsLogin] = useState(false)
+  const CONTRACT_ADDRESS = "dev-1641682453576-30872819216475";
+  const [wallet, setWallet] = useState(null)
+  useEffect(() => {
+    const initConnectWallet = async () => {
+      let newWallet = await new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS })
+      setWallet(newWallet)
+
+      let isSignedIn = await newWallet.startUp();
+      if (isSignedIn) {
+        // signedInFlow();
+        setIsLogin(true)
+      }
+      console.log("wallet:", wallet)
+    }
+    initConnectWallet()
+  }, [isLogin])
+  const handleLogOutClick = () => {
+    console.log("Signout")
+    wallet.signOut();
+    setIsLogin(false)
+  }
+
+
+
   const NavBarItemComponentContents = (
     <>
-      <div
-        className={`flex items-center ${
-          item.menu
-            ? 'bg-gray-100 dark:bg-slate-800 lg:bg-transparent lg:dark:bg-transparent p-3 lg:p-0'
-            : ''
-        }`}
-        onClick={handleMenuClick}
+      {isLogin && <div
+        className={`flex items-center ${item.menu
+          ? 'bg-gray-100 dark:bg-slate-800 lg:bg-transparent lg:dark:bg-transparent p-3 lg:p-0'
+          : ''
+          }`}
+        onClick={item.isLogout ? handleLogOutClick : handleMenuClick}
       >
         {item.isCurrentUser && <UserAvatarCurrentUser className="w-6 h-6 mr-3 inline-flex" />}
         {item.icon && <BaseIcon path={item.icon} className="transition-colors" />}
         <span
-          className={`px-2 transition-colors ${
-            item.isDesktopNoLabel && item.icon ? 'lg:hidden' : ''
-          }`}
+          className={`px-2 transition-colors ${item.isDesktopNoLabel && item.icon ? 'lg:hidden' : ''
+            }`}
         >
           {itemLabel}
         </span>
@@ -73,12 +100,12 @@ export default function NavBarItem({ item }: Props) {
             className="hidden lg:inline-flex transition-colors"
           />
         )}
-      </div>
+      </div>}
+      {!isLogin && item.isCurrentUser && <button onClick={() => { wallet.signIn(); }} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Connect Wallet</button>}
       {item.menu && (
         <div
-          className={`${
-            !isDropdownActive ? 'lg:hidden' : ''
-          } text-sm border-b border-gray-100 lg:border lg:bg-white lg:absolute lg:top-full lg:left-0 lg:min-w-full lg:z-20 lg:rounded-lg lg:shadow-lg lg:dark:bg-slate-800 dark:border-slate-700`}
+          className={`${!isDropdownActive ? 'lg:hidden' : ''
+            } text-sm border-b border-gray-100 lg:border lg:bg-white lg:absolute lg:top-full lg:left-0 lg:min-w-full lg:z-20 lg:rounded-lg lg:shadow-lg lg:dark:bg-slate-800 dark:border-slate-700`}
         >
           <NavBarMenuList menu={item.menu} />
         </div>
