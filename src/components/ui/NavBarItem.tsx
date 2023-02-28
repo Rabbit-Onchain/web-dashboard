@@ -9,6 +9,7 @@ import NavBarMenuList from './NavBarMenuList'
 import { useAppDispatch, useAppSelector } from '../../stores/hooks'
 import { MenuNavBarItem } from '../../interfaces'
 import { setDarkMode } from '../../stores/styleSlice'
+import { setUser } from "../../stores/mainSlice"
 import { Wallet } from '../../core/service/near-wallet';
 
 
@@ -51,7 +52,7 @@ export default function NavBarItem({ item }: Props) {
     }
   }
 
-
+  //connect wallet
   const [isLogin, setIsLogin] = useState(false)
   const CONTRACT_ADDRESS = "dev-1641682453576-30872819216475";
   const [wallet, setWallet] = useState(null)
@@ -69,6 +70,17 @@ export default function NavBarItem({ item }: Props) {
     }
     initConnectWallet()
   }, [isLogin])
+  useEffect(() => {
+    if (wallet) {
+      const { accountId } = wallet
+      accountId && dispatch(setUser({
+        name: wallet.accountId || "",
+        email: '',
+        avatar:
+          'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93',
+      }))
+    }
+  })
   const handleLogOutClick = () => {
     console.log("Signout")
     wallet.signOut();
@@ -101,7 +113,11 @@ export default function NavBarItem({ item }: Props) {
           />
         )}
       </div>}
-      {!isLogin && item.isCurrentUser && <button onClick={() => { wallet.signIn(); }} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Connect Wallet</button>}
+      {!isLogin && item.isCurrentUser &&
+        <button onClick={() => {
+          wallet.signIn();
+        }}
+          className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Connect Wallet</button>}
       {item.menu && (
         <div
           className={`${!isDropdownActive ? 'lg:hidden' : ''
