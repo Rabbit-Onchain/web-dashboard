@@ -7,13 +7,14 @@ import LoadingBlock from '../ui/LoadingBlock'
 import UserAvatar from '../ui/UserAvatar'
 import WhaleService from '../../core/service/whale.service'
 import { truncateAddr, to$ } from '../../core/util'
+import Tooltip from '../ui/Tooltip'
 
 const WhaleList = () => {
   const [whaleData, setWhaleData] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
   const [numPages, setNumPages] = useState(0)
   const [loading, setLoading] = useState(true)
-  
+
   const loadWhales = () => {
     setLoading(true)
     WhaleService.getWhales({
@@ -23,7 +24,7 @@ const WhaleList = () => {
         (result) => {
           setLoading(false)
           console.log(result)
-          setWhaleData(result.whales) 
+          setWhaleData(result.whales)
           setNumPages(result.totalPage)
         },
         (error) => {
@@ -72,14 +73,14 @@ const WhaleList = () => {
 
           {loading &&
             <>
-            <tr>
-              <th colSpan={5}>
-                 <LoadingBlock /> 
-              </th>
-            </tr> 
+              <tr>
+                <th colSpan={5}>
+                  <LoadingBlock />
+                </th>
+              </tr>
             </>
           }
-          
+
           {!loading && whaleData.length > 0 && whaleData.map((client: any) => (
             <tr key={client.id}>
               <td data-label="Addresse">
@@ -94,14 +95,37 @@ const WhaleList = () => {
                     client['stats']['top_coins'].map((coin: any, i: number) => {
                       if (i < 4 && getPercentage(coin.usd_value, client.usd_value) > 0) {
                         return (
-                          <span key={coin.id} className="p-1 border border-indigo-600 rounded mr-2">
-                              <img className='w-5 inline-block mr-1 align-top' src={coin.logo_url} alt={coin.symbol} />
-                              <span>{getPercentage(coin.usd_value, client.usd_value)} %</span>
-                          </span>
+                          <>
+                            <Tooltip message={<table>
+                              <tr>
+                                <td>Token</td>
+                                <td>{coin.symbol}</td>
+                              </tr>
+                              <tr>
+                                <td>Amount</td>
+                                <td>{coin.amount}</td>
+                              </tr>
+                              <tr>
+                                <td>Price</td>
+                                <td>{to$(coin.price)}</td>
+                              </tr>
+                              <tr>
+                                <td>Net worth</td>
+                                <td>{to$(coin.usd_value)}</td>
+                              </tr>
+                            </table>}>
+
+                              <span key={coin.id} className="my-anchor-element p-1 border border-indigo-600 rounded mr-2">
+                                <img className='w-5 inline-block mr-1 align-top' src={coin.logo_url} alt={coin.symbol} />
+                                <span>{getPercentage(coin.usd_value, client.usd_value)} %</span>
+                              </span>
+                            </Tooltip>
+
+                          </>
                         )
                       }
-                    })  
-                  }  
+                    })
+                  }
                 </div>
               </td>
               <td data-label="Top protocols<"></td>
