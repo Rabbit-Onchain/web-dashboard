@@ -16,7 +16,7 @@ export class RabbitNft {
     // }
   
     async mintNft(title, rarity, amount) {
-     const deposit = utils.format.parseNearAmount("1");
+     const deposit = utils.format.parseNearAmount(amount);
      // let deposit = 1
       return await this.wallet.callMethod({ 
         contractId: this.contractId, 

@@ -64,6 +64,10 @@ export default function NavBarItem({ item }: Props) {
       let newWallet = await new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS })
       console.log(newWallet)
       setWallet(newWallet)
+      window['rabbitNft'] = new RabbitNft({
+        contractId: CONTRACT_ADDRESS,
+        walletToUse: newWallet
+      });
     
       setContract(new RabbitNft({
         contractId: CONTRACT_ADDRESS, 
@@ -82,9 +86,6 @@ export default function NavBarItem({ item }: Props) {
 
   useEffect(() => {
     if (wallet) {
-      
-      
-
       const { accountId } = wallet
       accountId && dispatch(setUser({
         name: wallet.accountId || "",
@@ -102,11 +103,6 @@ export default function NavBarItem({ item }: Props) {
 
   const NavBarItemComponentContents = (
     <>
-    { isLogin && 
-        <button onClick={() => {
-          contract.mintNft("test 1", "Common", "1");
-        }} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Mint now</button>
-      }
       {isLogin && <div
         className={`flex items-center ${item.menu
           ? 'bg-gray-100 dark:bg-slate-800 lg:bg-transparent lg:dark:bg-transparent p-3 lg:p-0'
