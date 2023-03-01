@@ -10,7 +10,8 @@ import { useAppDispatch, useAppSelector } from '../../stores/hooks'
 import { MenuNavBarItem } from '../../interfaces'
 import { setDarkMode } from '../../stores/styleSlice'
 import { setUser } from "../../stores/mainSlice"
-import { Wallet } from '../../core/service/near-wallet';
+import { Wallet } from '../../core/service/near-protocol/near-wallet';
+import { RabbitNft } from '../../core/service/near-protocol/near-interface'
 
 
 type Props = {
@@ -54,12 +55,24 @@ export default function NavBarItem({ item }: Props) {
 
   //connect wallet
   const [isLogin, setIsLogin] = useState(false)
-  const CONTRACT_ADDRESS = "dev-1641682453576-30872819216475";
+  const CONTRACT_ADDRESS = "dev-1677397761500-82279137383421";
   const [wallet, setWallet] = useState(null)
+  const [contract, setContract] = useState(null)
+  
   useEffect(() => {
     const initConnectWallet = async () => {
       let newWallet = await new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS })
+      console.log(newWallet)
       setWallet(newWallet)
+      window['rabbitNft'] = new RabbitNft({
+        contractId: CONTRACT_ADDRESS,
+        walletToUse: newWallet
+      });
+    
+      setContract(new RabbitNft({
+        contractId: CONTRACT_ADDRESS, 
+        walletToUse: wallet
+      }));
 
       let isSignedIn = await newWallet.startUp();
       if (isSignedIn) {
@@ -70,6 +83,7 @@ export default function NavBarItem({ item }: Props) {
     }
     initConnectWallet()
   }, [isLogin])
+
   useEffect(() => {
     if (wallet) {
       const { accountId } = wallet
@@ -86,8 +100,6 @@ export default function NavBarItem({ item }: Props) {
     wallet.signOut();
     setIsLogin(false)
   }
-
-
 
   const NavBarItemComponentContents = (
     <>
@@ -113,10 +125,13 @@ export default function NavBarItem({ item }: Props) {
           />
         )}
       </div>}
+      
+      
       {!isLogin && item.isCurrentUser &&
         <button onClick={() => {
           wallet.signIn();
         }}
+
           className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Connect Wallet</button>}
       {item.menu && (
         <div
