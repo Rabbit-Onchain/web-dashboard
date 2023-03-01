@@ -6,8 +6,8 @@ import { providers } from 'near-api-js';
 // wallet selector UI
 import '@near-wallet-selector/modal-ui/styles.css';
 import { setupModal } from '@near-wallet-selector/modal-ui';
-import { src as LedgerIconUrl } from '@near-wallet-selector/ledger/assets/ledger-icon.png';
-import { src as MyNearIconUrl } from '@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png';
+import LedgerIconUrl from '@near-wallet-selector/ledger/assets/ledger-icon.png';
+import MyNearIconUrl from '@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png';
 
 // wallet selector options
 import { setupWalletSelector } from '@near-wallet-selector/core';
@@ -35,11 +35,10 @@ export class Wallet {
 
   // To be called when the website loads
   async startUp() {
-    console.log("LedgerIconUrl:", LedgerIconUrl)
     this.walletSelector = await setupWalletSelector({
       network: this.network,
-      modules: [setupMyNearWallet({ iconUrl: MyNearIconUrl || "" }),
-      setupLedger({ iconUrl: LedgerIconUrl || "" })],
+      modules: [setupMyNearWallet({ iconUrl: MyNearIconUrl?.src || "" }),
+      setupLedger({ iconUrl: LedgerIconUrl?.src || "" })],
     });
 
     const isSignedIn = this.walletSelector.isSignedIn();
@@ -55,7 +54,6 @@ export class Wallet {
   // Sign-in method
   signIn() {
     const description = 'Please select a wallet to sign in.';
-    console.log("this.walletSelector:", this.walletSelector)
     const modal = setupModal(this.walletSelector, { contractId: this.createAccessKeyFor, description });
     modal.show();
   }
@@ -69,7 +67,6 @@ export class Wallet {
 
   // Make a read-only call to retrieve information from the network
   async viewMethod({ contractId, method, args = {} }) {
-    // console.log("this.walletSelector:", this.walletSelector)
     const { network } = this.walletSelector.options;
     const provider = new providers.JsonRpcProvider({ url: network.nodeUrl });
 
