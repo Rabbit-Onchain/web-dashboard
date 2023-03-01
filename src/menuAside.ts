@@ -71,7 +71,7 @@ const menuAside: MenuAsideItem[] = [
   //   icon: mdiAlertCircle,
   // },
   {
-     href: '/responsive',
+     href: '/pro-features',
      label: 'Pro Features',
      icon: mdiResponsive,
   },

@@ -8,7 +8,7 @@ export const appTitle = 'RabbitOnChain'
 
 export const getPageTitle = (currentPageTitle: string) => `${currentPageTitle} — ${appTitle}`
 
-const CONTRACT_NAME = process.env.CONTRACT_NAME || "dev-1641682453576-30872819216475";
+const CONTRACT_NAME = process.env.CONTRACT_NAME || "dev-1677397761500-82279137383421";
 
 export const getWalletConfig = (env) => {
     switch (env) {
