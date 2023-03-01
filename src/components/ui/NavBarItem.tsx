@@ -57,7 +57,6 @@ export default function NavBarItem({ item }: Props) {
   const [isLogin, setIsLogin] = useState(false)
   const CONTRACT_ADDRESS = "dev-1677397761500-82279137383421";
   const [wallet, setWallet] = useState(null)
-  const [contract, setContract] = useState(null)
   
   useEffect(() => {
     const initConnectWallet = async () => {
@@ -69,11 +68,6 @@ export default function NavBarItem({ item }: Props) {
         walletToUse: newWallet
       });
     
-      setContract(new RabbitNft({
-        contractId: CONTRACT_ADDRESS, 
-        walletToUse: wallet
-      }));
-
       let isSignedIn = await newWallet.startUp();
       if (isSignedIn) {
         // signedInFlow();

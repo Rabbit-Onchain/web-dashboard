@@ -9,11 +9,21 @@ export class RabbitNft {
       this.wallet = walletToUse
     }
   
-    // async getNftInfo() {
-    //   const messages = await this.wallet.viewMethod({ contractId: this.contractId, method: "get_nft_info" })
-    //   console.log(messages)
-    //   return messages
-    // }
+    async getNftInfo(tokenId: string) {
+        return await this.wallet.viewMethod({ 
+            contractId: this.contractId, 
+            method: "get_nft_info" ,
+            args: { token_id: tokenId}
+        });
+    }
+
+    async getUserNfts(ownerId: string) {
+        return await this.wallet.viewMethod({ 
+            contractId: this.contractId, 
+            method: "get_nfts_by_owner" ,
+            args: { owner_id: ownerId}
+        });
+    }
   
     async mintNft(title, rarity, amount) {
      const deposit = utils.format.parseNearAmount(amount);
