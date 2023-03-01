@@ -8,7 +8,7 @@ import {
   mdiReload,
 } from '@mdi/js'
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import type { ReactElement } from 'react'
 import BaseButton from '../components/ui/BaseButton'
 import LayoutAuthenticated from '../layouts/Authenticated'
@@ -78,7 +78,7 @@ const ProFeatures = () => {
                       <span className="text-sm text-grey">Monthly</span>
                     </div>
                     <ul className="text-grey-dark leading-loose list-reset mb-6">
-                      <li>Lv1 features</li>
+                      <li>Common features</li>
                       <li>Social</li>
                       <li>Financial</li>
                       <li>Developer Activity</li>
@@ -103,7 +103,7 @@ const ProFeatures = () => {
                     </div>
 
                     <ul className="text-grey leading-loose list-reset mb-6">
-                      <li>Lv2 features</li>
+                      <li>Rare features</li>
                       <li>Whale Tracking</li>
                       <li>Competitor</li>
                       <li>Events</li>
