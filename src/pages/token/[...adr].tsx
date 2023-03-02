@@ -17,7 +17,7 @@ import WhaleService from '../../core/service/whale.service'
 import LoadingBlock from '../../components/ui/LoadingBlock'
 import { truncateAddr, to$ } from '../../core/util'
 
-const ProfilePage = () => {
+const TokenPage = () => {
   const router = useRouter()
   const { adr } = router.query
 
@@ -45,12 +45,12 @@ const ProfilePage = () => {
   useEffect(() => {
     console.log('userEffect in list whales now');
     loadWhale()
-  }, [])
+  })
 
   return (
     <>
       <Head>
-        <title>{getPageTitle('Profile')}</title>
+        <title>{getPageTitle('Token')}</title>
       </Head>
 
       {loading && <LoadingBlock /> }
@@ -83,8 +83,8 @@ const ProfilePage = () => {
   )
 }
 
-ProfilePage.getLayout = function getLayout(page: ReactElement) {
+TokenPage.getLayout = function getLayout(page: ReactElement) {
   return <LayoutAuthenticated>{page}</LayoutAuthenticated>
 }
 
-export default ProfilePage
+export default TokenPage

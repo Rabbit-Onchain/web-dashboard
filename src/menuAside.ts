@@ -76,17 +76,22 @@ const menuAside: MenuAsideItem[] = [
      icon: mdiResponsive,
   },
   {
-    label: 'Settings',
-    icon: mdiViewList,
-    menu: [
-      {
-        label: 'Item One',
-      },
-      {
-        label: 'Item Two',
-      },
-    ],
-  },
+    href: '/my-profile',
+    label: 'My Profile',
+    icon: mdiResponsive,
+ },
+  // {
+  //   label: 'Settings',
+  //   icon: mdiViewList,
+  //   menu: [
+  //     {
+  //       label: 'Item One',
+  //     },
+  //     {
+  //       label: 'Item Two',
+  //     },
+  //   ],
+  // },
 ]
 
 export default menuAside
