@@ -41,6 +41,7 @@ const MyProfilePage = () => {
 
   const getUserNFTS = async() => {
     if (userName) {
+      // TODO: get all nfts of user
       let rs = await window['rabbitNft'].getUserNfts(userName);
       console.log('rs buyNft: ', rs);
       if (rs && rs.length > 0) {

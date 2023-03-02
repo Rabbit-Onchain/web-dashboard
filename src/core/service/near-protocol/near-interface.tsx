@@ -20,7 +20,7 @@ export class RabbitNft {
     async getUserNfts(ownerId: string) {
         return await this.wallet.viewMethod({ 
             contractId: this.contractId, 
-            method: "get_nfts_by_owner" ,
+            method: "get_tokens_metadata_by_owner" ,
             args: { owner_id: ownerId}
         });
     }
