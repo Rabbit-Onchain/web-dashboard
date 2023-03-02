@@ -28,7 +28,7 @@ export default function TradingViewWidget() {
       return () => onLoadScriptRef.current = null;
 
       function createWidget() {
-        if (document.getElementById('tradingview_ea9d0') && 'TradingView' in window) {
+        if (document.getElementById('tradingview_1204b') && 'TradingView' in window) {
           new window.TradingView.widget({
             autosize: true,
             symbol: "GATEIO:REFUSDT",
@@ -40,7 +40,7 @@ export default function TradingViewWidget() {
             toolbar_bg: "#f1f3f6",
             enable_publishing: false,
             allow_symbol_change: true,
-            container_id: "tradingview_ea9d0"
+            container_id: "tradingview_1204b"
           });
         }
       }
@@ -50,7 +50,7 @@ export default function TradingViewWidget() {
 
   return (
     <div className='tradingview-widget-container'>
-      <div id='tradingview_ea9d0' />
+      <div id='tradingview_1204b' />
       <div className="tradingview-widget-copyright">
         <a href="https://www.tradingview.com/symbols/REFUSDT/?exchange=GATEIO" rel="noopener" target="_blank"><span className="blue-text">REFUSDT chart</span></a> by TradingView
       </div>

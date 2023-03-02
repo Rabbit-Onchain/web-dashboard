@@ -1,94 +1,16 @@
-import {
-  mdiSharkFin,
-  mdiChartTimelineVariant,
-  mdiAccount,
-  mdiMail,
-} from '@mdi/js'
-import Head from 'next/head'
-import type { ReactElement } from 'react'
-import React, { useState, useEffect } from 'react'
-import LayoutAuthenticated from '../../layouts/Authenticated'
-import SectionMain from '../../components/partials/SectionMain'
-import SectionTitleLine from '../../components/partials/token/SectionTitleLine'
-import CardBoxWidget from '../../components/ui/CardBoxWidget'
-import Tabs from '../../components/ui/Tabs'
-import { getPageTitle } from '../../config'
-import { useAppSelector } from '../../stores/hooks'
-import { useRouter } from 'next/router'
-import WhaleService from '../../core/service/whale.service'
-import LoadingBlock from '../../components/ui/LoadingBlock'
-import { truncateAddr, to$ } from '../../core/util'
-import CardBox from '../../components/ui/CardBox'
-import BaseButton from '../../components/ui/BaseButton'
-import TradingViewWidget from '../../components/partials/token/ChartTradingview'
-import { Field, Form, Formik } from 'formik'
-import FormField from '../../components/ui/FormField'
-import BaseDivider from '../../components/ui/BaseDivider'
-import BaseButtons from '../../components/ui/BaseButtons'
+// TradingViewWidget.jsx
 
-const TokenPage = () => {
-  const router = useRouter()
-  const { adr } = router.query
+import { mdiAccount, mdiMail } from '@mdi/js';
+import { Field, Form, Formik } from 'formik';
+import React, { useEffect, useRef } from 'react';
+import TradingViewWidget from '../../components/partials/token/ChartTradingview';
+import CardBox from '../../components/ui/CardBox';
+import FormField from '../../components/ui/FormField';
 
-  const [whaleData, setWhaleData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  
-  const loadWhale = () => {
-    setLoading(true)
-    WhaleService.getWhale({
-      adr: adr
-    })
-      .then(
-        (result) => {
-          setLoading(false)
-          console.log(result)
-          setWhaleData(result.whale) 
-        },
-        (error) => {
-          setLoading(false)
-          console.log(error);
-        }
-      )
-  };
-
-  useEffect(() => {
-    console.log('userEffect in list whales now');
-    setTimeout(() => {
-      // loadWhale()
-      setLoading(false)
-    }, 500);
-  }, [])
+export default function TokenOverview() {
 
   return (
-    <>
-      <Head>
-        <title>{getPageTitle('Token')}</title>
-      </Head>
-
-      {loading && <LoadingBlock /> }
-
-      {!loading && 
-
-        <SectionMain>
-          <SectionTitleLine icon={mdiSharkFin} title={adr.toString()} main>
-            <div className='w-32'>
-              <div>
-                  <BaseButton
-                      label="Buy Now"
-                      color="success"
-                      className=''
-                    />
-
-                  <BaseButton
-                      label="Share"
-                      color="info"
-                      className='ml-2'
-                    />
-              </div>
-            </div>
-          </SectionTitleLine>
-
-          <div className="flex flex-col w-full mb-2 lg:flex-row lg:space-x-2 space-y-2 lg:space-y-0 lg:mb-4">
+    <div className="flex flex-col w-full mb-2 lg:flex-row lg:space-x-2 space-y-2 lg:space-y-0 lg:mb-4">
             <CardBox className="w-full lg:w-2/3">
               <TradingViewWidget />
 
@@ -209,14 +131,5 @@ const TokenPage = () => {
               </div>
             </CardBox>
           </div>
-        </SectionMain>
-      }
-    </>
-  )
+  );
 }
-
-TokenPage.getLayout = function getLayout(page: ReactElement) {
-  return <LayoutAuthenticated>{page}</LayoutAuthenticated>
-}
-
-export default TokenPage
