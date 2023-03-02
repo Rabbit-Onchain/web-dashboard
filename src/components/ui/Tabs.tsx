@@ -37,7 +37,7 @@ export default function({ color, data }) {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 2
-                    ? "text-white bg-" + color + "-600 bg-pink-600 hover:bg-cyan-600"
+                    ? "text-white bg-" + color + "-600 bg-pink-600 "
                     : "text-" + color + "-600 bg-white")
                 }
                 onClick={e => {
