@@ -11,6 +11,7 @@ import {
   mdiResponsive,
   mdiPalette,
   mdiVuejs,
+  mdiAccount,
 } from '@mdi/js'
 import { MenuAsideItem } from './interfaces'
 
@@ -78,7 +79,7 @@ const menuAside: MenuAsideItem[] = [
   {
     href: '/my-profile',
     label: 'My Profile',
-    icon: mdiResponsive,
+    icon: mdiAccount,
  },
   // {
   //   label: 'Settings',
