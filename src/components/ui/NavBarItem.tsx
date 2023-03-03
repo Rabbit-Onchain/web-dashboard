@@ -93,6 +93,11 @@ export default function NavBarItem({ item }: Props) {
     console.log("Signout")
     wallet.signOut();
     setIsLogin(false)
+    dispatch(setUser({
+      name: "",
+      email: '',
+      avatar: ''
+    })) 
   }
 
   const NavBarItemComponentContents = (
@@ -126,7 +131,10 @@ export default function NavBarItem({ item }: Props) {
           wallet.signIn();
         }}
 
-          className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Connect Wallet</button>}
+          className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
+            Connect Wallet
+            </button>
+        }
       {item.menu && (
         <div
           className={`${!isDropdownActive ? 'lg:hidden' : ''
