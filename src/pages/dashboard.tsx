@@ -3,6 +3,7 @@ import {
   mdiChartTimelineVariant,
   mdiAccount,
   mdiMail,
+  mdiAccountMultiple,
 } from '@mdi/js'
 import Head from 'next/head'
 import type { ReactElement } from 'react'
@@ -17,6 +18,7 @@ import WhaleService from '../core/service/whale.service'
 import LoadingBlock from '../components/ui/LoadingBlock'
 import CardBox from '../components/ui/CardBox'
 import BaseButton from '../components/ui/BaseButton'
+import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
 
 const TokenPage = () => {
   const router = useRouter()
@@ -62,6 +64,8 @@ const TokenPage = () => {
       {!loading && 
 
         <SectionMain>
+          <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Project of week" />
+
           <SectionTitleLine icon={mdiSharkFin} title={''} main>
             <div className='w-32'>
               <div>
