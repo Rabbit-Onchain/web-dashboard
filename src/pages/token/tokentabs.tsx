@@ -87,6 +87,107 @@ const TokensTab = ({ color }) => {
                 Tokenomics
               </a>
             </li>
+
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 5
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(5);
+                }}
+                data-toggle="tab"
+                href="#link5"
+                role="tablist"
+              >
+                Vesting Schedule
+              </a>
+            </li>
+
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 6
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(6);
+                }}
+                data-toggle="tab"
+                href="#link6"
+                role="tablist"
+              >
+                Social
+              </a>
+            </li>
+
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 7
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(7);
+                }}
+                data-toggle="tab"
+                href="#link7"
+                role="tablist"
+              >
+                Financial
+              </a>
+            </li>
+
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 8
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(8);
+                }}
+                data-toggle="tab"
+                href="#link8"
+                role="tablist"
+              >
+                Developer Activity
+              </a>
+            </li>
+
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 9
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(9);
+                }}
+                data-toggle="tab"
+                href="#link9"
+                role="tablist"
+              >
+                Event
+              </a>
+              </li>
+
           </ul>
 
 

@@ -49,10 +49,10 @@ const ProFeatures = () => {
                 
                 <div className="mb-4 lg:mb-0 lg:w-1/3 lg:px-2 rounded-md">
                   <div className="text-center border border-grey-light lg:pb-16 rounded">
-                    <div> <img src="https://dl.openseauserdata.com/cache/originImage/files/d71fa9e6fb8ed0856ae060e4c30d76c9.png" /> </div>
+                    <div><img style={{'display': 'inline'}} src='/static/images/common.png' /> </div>
                     <h2 className="text-lg mb-4 text-5xl mt-4">Common</h2>
                     <div className="mb-6">
-                      <span className="block text-5xl pb-2">1 Ⓝ</span>
+                      <span className="block text-5xl pb-2">1 <img style={{'display': 'inline'}} src='/static/images/usdt.svg' /> </span>
                       <span className="text-sm text-grey">Monthly</span>
                     </div>
                     <ul className="text-grey leading-loose list-reset mb-6">
@@ -71,10 +71,10 @@ const ProFeatures = () => {
                 
                 <div className="mb-4 lg:mb-0 lg:w-1/3 lg:px-2 rounded-md">
                   <div className="text-center border border-grey-light lg:pb-16 rounded lg:shadow-lg">
-                  <div> <img src="https://dl.openseauserdata.com/cache/originImage/files/7b3d5e784b8003818d482e591525a234.png" /> </div>
+                  <div><img style={{'display': 'inline'}} src='/static/images/rare.png' /> </div>
                     <h2 className="text-lg mb-4 text-5xl mt-4">Rare</h2>
                     <div className="mb-6">
-                      <span className="block text-5xl pb-2">5 Ⓝ</span>
+                      <span className="block text-5xl pb-2">5 <img style={{'display': 'inline'}} src='/static/images/usdt.svg' /></span>
                       <span className="text-sm text-grey">Monthly</span>
                     </div>
                     <ul className="text-grey-dark leading-loose list-reset mb-6">
@@ -95,10 +95,12 @@ const ProFeatures = () => {
                 
                 <div className="mb-4 lg:mb-0 lg:w-1/3 lg:px-2 rounded-md">
                   <div className="text-center border border-grey-light lg:pb-16 rounded">
-                  <div> <img src="https://dl.openseauserdata.com/cache/originImage/files/73b5e5a4d93333a17f21b205d0ccac0d.png" /> </div>
+                  <div> 
+                    <img style={{'display': 'inline'}} src='/static/images/mythic.png' />
+                    </div>
                     <h2 className="text-lg mb-4 text-5xl mt-4">Mythic</h2>
                     <div className="mb-6">
-                      <span className="block text-5xl pb-2">10 Ⓝ</span>
+                      <span className="block text-5xl pb-2">10 <img style={{'display': 'inline'}} src='/static/images/usdt.svg' /></span>
                       <span className="text-sm text-grey">Monthly</span>
                     </div>
 
