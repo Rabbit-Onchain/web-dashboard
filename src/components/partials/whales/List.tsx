@@ -84,7 +84,7 @@ const WhaleList = () => {
           {!loading && whaleData.length > 0 && whaleData.map((client: any) => (
             <tr key={client.id}>
               <td data-label="Addresse">
-                <Link href={`/profile/${encodeURIComponent(client.adr)}`}>
+                <Link href={`/profile?adr=${encodeURIComponent(client.adr)}`}>
                   {truncateAddr(client.adr)}
                 </Link>
               </td>

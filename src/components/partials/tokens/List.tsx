@@ -86,7 +86,7 @@ const TokenList = () => {
           {!loading && tokensData.length > 0 && tokensData.map((token: any) => (
             <tr key={token.id}>
               <td data-label="Addresse">
-                <Link href={`/token/${encodeURIComponent(token.symbol)}`}>
+                <Link href={`/token?adr=${encodeURIComponent(token.symbol)}`}>
                   <img src={token.icon} className="mr-2" style={{'display': 'inline-block', width: '1.25rem', height: '1.25rem', verticalAlign: 'text-top'}} />
                   {token.name}
                 </Link>

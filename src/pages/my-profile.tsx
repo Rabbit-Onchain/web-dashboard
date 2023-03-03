@@ -4,6 +4,7 @@ import {
   mdiFormTextboxPassword,
   mdiGithub,
   mdiMail,
+  mdiMonitorCellphone,
   mdiUpload,
 } from '@mdi/js'
 import { Formik, Form, Field } from 'formik'
@@ -18,8 +19,12 @@ import UserCard from '../components/ui/UserCard'
 import type { UserForm } from '../interfaces'
 import { getPageTitle } from '../config'
 import { useAppSelector } from '../stores/hooks'
+import { getQueryVariable } from '../core/util'
+import NotificationBar from '../components/ui/NotificationBar'
 
 const MyProfilePage = () => {
+  const [newNft, setNewNft] = useState(false)
+
   const userName = useAppSelector((state) => state.main.userName)
   const userEmail = useAppSelector((state) => state.main.userEmail)
 
@@ -30,6 +35,9 @@ const MyProfilePage = () => {
 
   useEffect(() => {
     getUserNFTS();
+    if (getQueryVariable('transactionHashes')) {
+      setNewNft(true) ;
+    }
   }, []); 
 
   const getUserNFTS = async() => {
@@ -48,6 +56,12 @@ const MyProfilePage = () => {
       </Head>
 
       <SectionMain>
+
+        {newNft &&  <NotificationBar color="warning" icon={mdiMonitorCellphone}>
+          Congratulations ! You've got a new NFT, we wish you enjoy with RabbitOnChain.
+        </NotificationBar>
+        }
+
         <SectionTitleLineWithButton icon={mdiAccount} title="My Profile" main></SectionTitleLineWithButton>
 
         <UserCard className="mb-6" />

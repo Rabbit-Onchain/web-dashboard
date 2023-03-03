@@ -7,26 +7,23 @@ import {
 import Head from 'next/head'
 import type { ReactElement } from 'react'
 import React, { useState, useEffect } from 'react'
-import LayoutAuthenticated from '../../layouts/Authenticated'
-import SectionMain from '../../components/partials/SectionMain'
-import SectionTitleLine from '../../components/partials/token/SectionTitleLine'
-import CardBoxWidget from '../../components/ui/CardBoxWidget'
-import Tabs from './tokentabs'
-import { getPageTitle } from '../../config'
-import { useAppSelector } from '../../stores/hooks'
+import LayoutAuthenticated from '../layouts/Authenticated'
+import SectionMain from '../components/partials/SectionMain'
+import SectionTitleLine from '../components/partials/token/SectionTitleLine'
+import CardBoxWidget from '../components/ui/CardBoxWidget'
+import Tabs from './token/tokentabs'
+import { getPageTitle } from '../config'
 import { useRouter } from 'next/router'
-import WhaleService from '../../core/service/whale.service'
-import LoadingBlock from '../../components/ui/LoadingBlock'
-import { truncateAddr, to$ } from '../../core/util'
-import CardBox from '../../components/ui/CardBox'
-import BaseButton from '../../components/ui/BaseButton'
+import WhaleService from '../core/service/whale.service'
+import LoadingBlock from '../components/ui/LoadingBlock'
+import BaseButton from '../components/ui/BaseButton'
+import { getQueryVariable } from '../core/util'
 
 const TokenPage = () => {
   const router = useRouter()
-  const { adr } = router.query
-
   const [whaleData, setWhaleData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [adr, setAdr] = useState('')
   
   const loadWhale = () => {
     setLoading(true)
@@ -48,6 +45,11 @@ const TokenPage = () => {
 
   useEffect(() => {
     console.log('userEffect in list whales now');
+    if (getQueryVariable('adr')) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      setAdr(getQueryVariable('adr'));
+    }
     setTimeout(() => {
       // loadWhale()
       setLoading(false)
