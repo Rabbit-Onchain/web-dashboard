@@ -1,6 +1,7 @@
 import React from "react";
 import TokenFundraising from "./fundraising";
 import TokenOverview from "./overview";
+import TokenTeam from "./team";
 
 export default function({ color }) {
   const [openTab, setOpenTab] = React.useState(1);
@@ -100,7 +101,7 @@ export default function({ color }) {
                 </div>
                 
                 <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-                 
+                  <TokenTeam />
                 </div>
 
                 <div className={openTab === 4 ? "block" : "hidden"} id="link4">
