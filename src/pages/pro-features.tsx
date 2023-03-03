@@ -52,7 +52,7 @@ const ProFeatures = () => {
                     <div><img style={{'display': 'inline'}} src='/static/images/common.png' /> </div>
                     <h2 className="text-lg mb-4 text-5xl mt-4">Common</h2>
                     <div className="mb-6">
-                      <span className="block text-5xl pb-2">1 <img style={{'display': 'inline'}} src='/static/images/usdt.svg' /> </span>
+                      <span className="block text-5xl pb-2">1 <img className='rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800' style={{'display': 'inline', 'width': '40px'}} src='/static/images/solana.png' /></span>
                       <span className="text-sm text-grey">Monthly</span>
                     </div>
                     <ul className="text-grey leading-loose list-reset mb-6">
@@ -74,7 +74,7 @@ const ProFeatures = () => {
                   <div><img style={{'display': 'inline'}} src='/static/images/rare.png' /> </div>
                     <h2 className="text-lg mb-4 text-5xl mt-4">Rare</h2>
                     <div className="mb-6">
-                      <span className="block text-5xl pb-2">5 <img style={{'display': 'inline'}} src='/static/images/usdt.svg' /></span>
+                      <span className="block text-5xl pb-2">5 <img className='rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800' style={{'display': 'inline', 'width': '40px'}} src='/static/images/solana.png' /></span>
                       <span className="text-sm text-grey">Monthly</span>
                     </div>
                     <ul className="text-grey-dark leading-loose list-reset mb-6">
@@ -100,7 +100,7 @@ const ProFeatures = () => {
                     </div>
                     <h2 className="text-lg mb-4 text-5xl mt-4">Mythic</h2>
                     <div className="mb-6">
-                      <span className="block text-5xl pb-2">10 <img style={{'display': 'inline'}} src='/static/images/usdt.svg' /></span>
+                      <span className="block text-5xl pb-2">10 <img className='rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800' style={{'display': 'inline', 'width': '40px'}} src='/static/images/solana.png' /></span>
                       <span className="text-sm text-grey">Monthly</span>
                     </div>
 

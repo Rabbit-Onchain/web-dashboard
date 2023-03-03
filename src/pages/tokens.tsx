@@ -41,7 +41,7 @@ const Tokens = () => {
         <title>{getPageTitle('Tokens')}</title>
       </Head>
       <SectionMain>
-        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Near Protocol Ecosystem Tokens (NEP-141)" />
+        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Tokens" />
 
         <NotificationBar color="info" icon={mdiMonitorCellphone}>
           We've screened out a bunch of token addresses to help you keep track of all the significant happenings on-chain
