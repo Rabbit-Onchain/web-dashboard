@@ -5,7 +5,7 @@
     "build": "next build",
     "export": "next export",
     "start": "next start -p 3001",
-    "pm2app":"pm2 start yarn --name 'app-web-near' --interpreter bash -- start",
+    "pm2app": "pm2 start npm --name 'app-web-near' -- start",
     "lint": "next lint",
     "format": "prettier '{components,pages,src,interfaces,hooks}/**/*.{tsx,ts,js}' --write"
   },
