@@ -26,6 +26,7 @@ import ChartLineSample from '../components/ChartLineSample'
 import NotificationBar from '../components/ui/NotificationBar'
 import TableSampleClients from '../components/partials/TableSampleClients'
 import { getPageTitle } from '../config'
+import LineChartComponent from '../components/LineChart'
 
 const Dashboard = () => {
   const { clients } = useSampleClients()
@@ -112,7 +113,10 @@ const Dashboard = () => {
           <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
         </SectionTitleLineWithButton>
 
-        <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox>
+        {/* <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox> */}
+        <CardBox className="mb-6 h-200">
+          {<LineChartComponent />}
+        </CardBox>
 
         <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Clients" />
 

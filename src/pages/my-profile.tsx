@@ -25,31 +25,35 @@ import UserCard from '../components/ui/UserCard'
 import type { UserForm } from '../interfaces'
 import { getPageTitle } from '../config'
 import { useAppSelector } from '../stores/hooks'
+import UserNft from '../components/ui/UserNft'
 
 const MyProfilePage = () => {
   const userName = useAppSelector((state) => state.main.userName)
+  console.log('userName1:', userName)
   const userEmail = useAppSelector((state) => state.main.userEmail)
-
+  const [userNfts, setUserNfts] = useState([])
   const userForm: UserForm = {
     name: userName,
     email: userEmail,
   }
 
-  useEffect(() => {
-    getUserNFTS();
-  }, []); 
-
-  const getUserNFTS = async() => {
+  const getUserNFTS = async () => {
+    console.log('Done')
+    console.log('userName:', userName)
     if (userName) {
       // TODO: get all nfts of user
-      let rs = await window['rabbitNft'].getUserNfts(userName);
-      console.log('rs buyNft: ', rs);
+      let rs = await window['rabbitNft'].getUserNfts(userName)
+      console.log('rs buyNft: ', rs)
       if (rs && rs.length > 0) {
-
+        setUserNfts(rs)
       }
     }
   }
-
+  useEffect(() => {
+    console.log('useEffect đã chạy')
+    getUserNFTS()
+  }, [])
+  console.log('userNfts:', userNfts)
   return (
     <>
       <Head>
@@ -57,79 +61,73 @@ const MyProfilePage = () => {
       </Head>
 
       <SectionMain>
-        <SectionTitleLineWithButton icon={mdiAccount} title="My Profile" main></SectionTitleLineWithButton>
+        <SectionTitleLineWithButton
+          icon={mdiAccount}
+          title="My Profile"
+          main
+        ></SectionTitleLineWithButton>
 
         <UserCard className="mb-6" />
 
         <SectionTitleLineWithButton icon={mdiAccount} title="My NFTs"></SectionTitleLineWithButton>
-        
+
         <CardBox>
           <div className="items-center text-center grid grid-cols-1 gap-y-4 gap-x-2 md:grid-cols-4 lg:grid-cols-12">
-            <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="w-full p-2 text-center space-y-2">
-              <div className="w-24 mx-auto">
-                <img src="https://dl.openseauserdata.com/cache/originImage/files/d71fa9e6fb8ed0856ae060e4c30d76c9.png" alt="media" className="h-24 w-full shadow-lg rounded-full shadow-lg" />
-              </div>
-              <div className="text-sm font-bold">Common</div>
-              <div className="text-sm">Expired At: 12 May 2023</div>
-            </div>
-            </div>
-
-            <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="w-full p-2 text-center space-y-2">
-              <div className="w-24 mx-auto">
-                <img src="https://dl.openseauserdata.com/cache/originImage/files/d71fa9e6fb8ed0856ae060e4c30d76c9.png" alt="media" className="h-24 w-full shadow-lg rounded-full shadow-lg" />
-              </div>
-              <div className="text-sm font-bold">Common</div>
-              <div className="text-sm">Expired At: 12 May 2023</div>
-            </div>
-            </div>
-
-            <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="w-full p-2 text-center space-y-2">
-              <div className="w-24 mx-auto">
-                <img src="https://dl.openseauserdata.com/cache/originImage/files/d71fa9e6fb8ed0856ae060e4c30d76c9.png" alt="media" className="h-24 w-full shadow-lg rounded-full shadow-lg" />
-              </div>
-            <div className="text-sm font-bold">Common</div>
-            <div className="text-sm">Expired At: 12 May 2023</div>
-            </div>
-            </div>
+            <>
+              {userNfts.map((userNft) => (
+                <UserNft key={userNft.token_id} userNft={userNft} />
+              ))}
+            </>
           </div>
         </CardBox>
 
-        <SectionTitleLineWithButton icon={mdiAccount} title="My Whale Followings"></SectionTitleLineWithButton>
-        
+        <SectionTitleLineWithButton
+          icon={mdiAccount}
+          title="My Whale Followings"
+        ></SectionTitleLineWithButton>
+
         <CardBox>
           <div className="items-center text-center grid grid-cols-1 gap-y-4 gap-x-2 md:grid-cols-4 lg:grid-cols-12">
             <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="w-full p-2 text-center space-y-2">
-              <div className="w-24 mx-auto">
-                <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="media" className="h-24 w-full shadow-lg rounded-full shadow-lg" />
+              <div className="w-full p-2 text-center space-y-2">
+                <div className="w-24 mx-auto">
+                  <img
+                    src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80"
+                    alt="media"
+                    className="h-24 w-full shadow-lg rounded-full shadow-lg"
+                  />
+                </div>
+                <div className="text-sm font-bold">0x2a82…3a26</div>
               </div>
-              <div className="text-sm font-bold">0x2a82…3a26</div>
-            </div>
             </div>
 
             <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="w-full p-2 text-center space-y-2">
-              <div className="w-24 mx-auto">
-              <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="media" className="h-24 w-full shadow-lg rounded-full shadow-lg" />
+              <div className="w-full p-2 text-center space-y-2">
+                <div className="w-24 mx-auto">
+                  <img
+                    src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80"
+                    alt="media"
+                    className="h-24 w-full shadow-lg rounded-full shadow-lg"
+                  />
+                </div>
+                <div className="text-sm font-bold">0x2a82…3a26</div>
               </div>
-              <div className="text-sm font-bold">0x2a82…3a26</div>
-            </div>
             </div>
 
             <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="w-full p-2 text-center space-y-2">
-              <div className="w-24 mx-auto">
-              <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="media" className="h-24 w-full shadow-lg rounded-full shadow-lg" />
+              <div className="w-full p-2 text-center space-y-2">
+                <div className="w-24 mx-auto">
+                  <img
+                    src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80"
+                    alt="media"
+                    className="h-24 w-full shadow-lg rounded-full shadow-lg"
+                  />
+                </div>
+                <div className="text-sm font-bold">0x2a82…3a26</div>
               </div>
-              <div className="text-sm font-bold">0x2a82…3a26</div>
-            </div>
             </div>
           </div>
         </CardBox>
-        
       </SectionMain>
     </>
   )
