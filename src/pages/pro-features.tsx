@@ -20,8 +20,17 @@ import { Client, Transaction } from '../interfaces'
 import CardBoxClient from '../components/ui/CardBoxClient'
 import CardBox from '../components/ui/CardBox'
 import { getPageTitle } from '../config'
+import { getQueryVariable } from '../core/util'
 
 const ProFeatures = () => {
+
+  // use getQueryVariable
+  useEffect(() => {
+    if (getQueryVariable('transactionHashes')) {
+      const url = "/my-profile?transactionHashes=" + getQueryVariable('transactionHashes') + "&action=bought-nft";
+      window.location.href = url;
+    }
+  }, []); 
 
   const buyNft = async (title, rarity, amount) => {
     const rs = await window['rabbitNft'].mintNft(title, rarity, amount);

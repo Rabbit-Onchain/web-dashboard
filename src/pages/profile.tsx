@@ -5,29 +5,27 @@ import {
 import Head from 'next/head'
 import type { ReactElement } from 'react'
 import React, { useState, useEffect } from 'react'
-import LayoutAuthenticated from '../../layouts/Authenticated'
-import SectionMain from '../../components/partials/SectionMain'
-import SectionTitleLine from '../../components/partials/profile/SectionTitleLine'
-import CardBoxWidget from '../../components/ui/CardBoxWidget'
-import Tabs from '../../components/ui/Tabs'
-import { getPageTitle } from '../../config'
-import { useAppSelector } from '../../stores/hooks'
+import LayoutAuthenticated from '../layouts/Authenticated'
+import SectionMain from '../components/partials/SectionMain'
+import SectionTitleLine from '../components/partials/profile/SectionTitleLine'
+import CardBoxWidget from '../components/ui/CardBoxWidget'
+import Tabs from '../components/ui/Tabs'
+import { getPageTitle } from '../config'
+import { useAppSelector } from '../stores/hooks'
 import { useRouter } from 'next/router'
-import WhaleService from '../../core/service/whale.service'
-import LoadingBlock from '../../components/ui/LoadingBlock'
-import { truncateAddr, to$ } from '../../core/util'
+import WhaleService from '../core/service/whale.service'
+import LoadingBlock from '../components/ui/LoadingBlock'
+import { truncateAddr, to$, getQueryVariable } from '../core/util'
 
 const ProfilePage = () => {
-  const router = useRouter()
-  const { adr } = router.query
-
   const [whaleData, setWhaleData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [adr, setAdr] = useState('')
   
-  const loadWhale = () => {
+  const loadWhale = (whaleAdr) => {
     setLoading(true)
     WhaleService.getWhale({
-      adr: adr
+      adr: whaleAdr
     })
       .then(
         (result) => {
@@ -44,7 +42,12 @@ const ProfilePage = () => {
 
   useEffect(() => {
     console.log('userEffect in list whales now');
-    loadWhale()
+    if (getQueryVariable('adr')) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      setAdr(getQueryVariable('adr'));
+      loadWhale(getQueryVariable('adr'));
+    }
   }, [])
 
   return (
