@@ -19,7 +19,7 @@ const menuAside: MenuAsideItem[] = [
   {
     href: '/dashboard',
     icon: mdiMonitor,
-    label: 'Dashboard',
+    label: 'Home',
   },
   {
     href: '/tokens',

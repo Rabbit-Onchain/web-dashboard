@@ -1,13 +1,13 @@
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
-import { Client } from '../../interfaces'
-import Pagination from '../ui/Pagination'
-import LoadingBlock from '../ui/LoadingBlock'
-import UserAvatar from '../ui/UserAvatar'
-import WhaleService from '../../core/service/whale.service'
-import { truncateAddr, to$ } from '../../core/util'
-import Tooltip from '../ui/Tooltip'
+import { Client } from '../../../interfaces'
+import Pagination from '../../ui/Pagination'
+import LoadingBlock from '../../ui/LoadingBlock'
+import UserAvatar from '../../ui/UserAvatar'
+import WhaleService from '../../../core/service/whale.service'
+import { truncateAddr, to$ } from '../../../core/util'
+import Tooltip from '../../ui/Tooltip'
 
 const WhaleList = () => {
   const [whaleData, setWhaleData] = useState([])

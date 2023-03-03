@@ -14,21 +14,14 @@ import BaseButton from '../components/ui/BaseButton'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/partials/SectionMain'
 import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
-import CardBoxWidget from '../components/ui/CardBoxWidget'
 import { useSampleClients, useSampleTransactions } from '../hooks/sampleData'
-import CardBoxTransaction from '../components/ui/CardBoxTransaction'
-import { Client, Transaction } from '../interfaces'
-import CardBoxClient from '../components/ui/CardBoxClient'
-import SectionBannerStarOnGitHub from '../components/ui/SectionBannerStarOnGitHub'
 import CardBox from '../components/ui/CardBox'
 import { sampleChartData } from '../components/ChartLineSample/config'
-import ChartLineSample from '../components/ChartLineSample'
 import NotificationBar from '../components/ui/NotificationBar'
-import TableSampleClients from '../components/partials/TableSampleClients'
-import WhaleList from '../components/Whales/List'
+import TokenList from '../components/partials/tokens/List'
 import { getPageTitle } from '../config'
 
-const Dashboard = () => {
+const Tokens = () => {
   const { clients } = useSampleClients()
   const { transactions } = useSampleTransactions()
 
@@ -48,22 +41,22 @@ const Dashboard = () => {
         <title>{getPageTitle('Tokens')}</title>
       </Head>
       <SectionMain>
-        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Whales" />
+        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Near Protocol Ecosystem Tokens (NEP-141)" />
 
         <NotificationBar color="info" icon={mdiMonitorCellphone}>
-          We've screened out a bunch of whale addresses to help you keep track of all the significant happenings on-chain
+          We've screened out a bunch of token addresses to help you keep track of all the significant happenings on-chain
         </NotificationBar>
 
         <CardBox hasTable>
-          <WhaleList />
+          <TokenList />
         </CardBox>
       </SectionMain>
     </>
   )
 }
 
-Dashboard.getLayout = function getLayout(page: ReactElement) {
+Tokens.getLayout = function getLayout(page: ReactElement) {
   return <LayoutAuthenticated>{page}</LayoutAuthenticated>
 }
 
-export default Dashboard
+export default Tokens
