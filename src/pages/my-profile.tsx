@@ -10,14 +10,7 @@ import { Formik, Form, Field } from 'formik'
 import Head from 'next/head'
 import type { ReactElement } from 'react'
 import React, { useState, useEffect } from 'react'
-import BaseButton from '../components/ui/BaseButton'
-import BaseButtons from '../components/ui/BaseButtons'
-import BaseDivider from '../components/ui/BaseDivider'
 import CardBox from '../components/ui/CardBox'
-import CardBoxComponentBody from '../components/ui/CardBoxComponentBody'
-import CardBoxComponentFooter from '../components/ui/CardBoxComponentFooter'
-import FormField from '../components/ui/FormField'
-import FormFilePicker from '../components/ui/FormFilePicker'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/partials/SectionMain'
 import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
@@ -42,11 +35,9 @@ const MyProfilePage = () => {
   const getUserNFTS = async() => {
     if (userName) {
       // TODO: get all nfts of user
-      let rs = await window['rabbitNft'].getUserNfts(userName);
+      const rs = await window['rabbitNft'].getUserNfts(userName);
       console.log('rs buyNft: ', rs);
-      if (rs && rs.length > 0) {
-
-      }
+      // if (rs && rs.length > 0) {}
     }
   }
 

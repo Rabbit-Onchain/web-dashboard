@@ -24,7 +24,7 @@ import { getPageTitle } from '../config'
 const ProFeatures = () => {
 
   const buyNft = async (title, rarity, amount) => {
-    let rs = await window['rabbitNft'].mintNft(title, rarity, amount);
+    const rs = await window['rabbitNft'].mintNft(title, rarity, amount);
     console.log('rs buyNft: ', rs);
   }
 

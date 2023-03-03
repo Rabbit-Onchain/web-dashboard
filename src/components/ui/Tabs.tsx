@@ -3,7 +3,9 @@ import CardBoxWhaleAsset from "../partials/profile/CardBoxWhaleAsset";
 import CardBox from "./CardBox";
 import { truncateAddr, to$ } from '../../core/util'
 
-export default function({ color, data }) {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const Tabs = ({ color, data }) => {
   const [openTab, setOpenTab] = React.useState(1);
   return (
     <>
@@ -156,4 +158,6 @@ export default function({ color, data }) {
       </div>
     </>
   );
-};
+}
+
+export default Tabs

@@ -3,7 +3,9 @@ import TokenFundraising from "./fundraising";
 import TokenOverview from "./overview";
 import TokenTeam from "./team";
 
-export default function({ color }) {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const TokensTab = ({ color }) => {
   const [openTab, setOpenTab] = React.useState(1);
   return (
     <>
@@ -114,4 +116,6 @@ export default function({ color }) {
       </div>
     </>
   );
-};
+}
+
+export default TokensTab

@@ -60,7 +60,7 @@ export default function NavBarItem({ item }: Props) {
   
   useEffect(() => {
     const initConnectWallet = async () => {
-      let newWallet = await new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS })
+      const newWallet = await new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS })
       console.log(newWallet)
       setWallet(newWallet)
       window['rabbitNft'] = new RabbitNft({
@@ -68,7 +68,7 @@ export default function NavBarItem({ item }: Props) {
         walletToUse: newWallet
       });
     
-      let isSignedIn = await newWallet.startUp();
+      const isSignedIn = await newWallet.startUp();
       if (isSignedIn) {
         // signedInFlow();
         setIsLogin(true)
