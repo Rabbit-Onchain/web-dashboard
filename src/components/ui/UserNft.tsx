@@ -19,20 +19,19 @@ export default function UserNft({ userNft }) {
       time * 2592000000000000,
       `${amount}`
     )
-    console.log('rs:', rs)
   }
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
-      window['rabbitNft'].getNftInfo(userNft.token_id).then((result) => {
-        result.token_id = userNft.token_id
-        console.log(
-          'convertNanoSecondToHumanTime(result.expires_at):',
-          convertNanoSecondToHumanTime(result.expires_at)
-        )
-        setTime(convertNanoSecondToHumanTime(result.expires_at))
-        console.log('getUserInfo:', result)
-      })
+      window['rabbitNft'].getNftInfo(userNft.token_id).then(
+        (result) => {
+          result.token_id = userNft.token_id
+          setTime(convertNanoSecondToHumanTime(result.expires_at))
+        },
+        (error) => {
+          setLoading(false)
+        }
+      )
     }, 1000)
 
     setLoading(false)
@@ -62,16 +61,16 @@ export default function UserNft({ userNft }) {
               Expend Now
               <svg
                 className="w-4 h-4 ml-2"
-                aria-hidden="true"
+                // ariaHidden="true"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M19 9l-7 7-7-7"
                 ></path>
               </svg>
@@ -83,7 +82,7 @@ export default function UserNft({ userNft }) {
               >
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="dropdownDefaultButton"
+                  // ariaLabelledby="dropdownDefaultButton"
                 >
                   <li>
                     <a
@@ -105,7 +104,17 @@ export default function UserNft({ userNft }) {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault()
+                        const amount =
+                          userNft.metadata.title === 'Mythic'
+                            ? '10'
+                            : userNft.metadata.title === 'Rare'
+                            ? '5'
+                            : '1'
+                        extendExpired(userNft.token_id, 3, amount)
+                      }}
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       3 Month
@@ -113,7 +122,17 @@ export default function UserNft({ userNft }) {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault()
+                        const amount =
+                          userNft.metadata.title === 'Mythic'
+                            ? '10'
+                            : userNft.metadata.title === 'Rare'
+                            ? '5'
+                            : '1'
+                        extendExpired(userNft.token_id, 6, amount)
+                      }}
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       6 Month

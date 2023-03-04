@@ -1,139 +1,89 @@
 import {
-  mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartPie,
+  mdiSharkFin,
   mdiChartTimelineVariant,
-  mdiGithub,
-  mdiMonitorCellphone,
-  mdiReload,
+  mdiAccount,
+  mdiMail,
+  mdiAccountMultiple,
 } from '@mdi/js'
 import Head from 'next/head'
-import React, { useState } from 'react'
 import type { ReactElement } from 'react'
-import BaseButton from '../components/ui/BaseButton'
+import React, { useState, useEffect } from 'react'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/partials/SectionMain'
-import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
-import CardBoxWidget from '../components/ui/CardBoxWidget'
-import { useSampleClients, useSampleTransactions } from '../hooks/sampleData'
-import CardBoxTransaction from '../components/ui/CardBoxTransaction'
-import { Client, Transaction } from '../interfaces'
-import CardBoxClient from '../components/ui/CardBoxClient'
-import SectionBannerStarOnGitHub from '../components/ui/SectionBannerStarOnGitHub'
-import CardBox from '../components/ui/CardBox'
-import { sampleChartData } from '../components/ChartLineSample/config'
-import ChartLineSample from '../components/ChartLineSample'
-import NotificationBar from '../components/ui/NotificationBar'
-import TableSampleClients from '../components/partials/TableSampleClients'
+import SectionTitleLine from '../components/partials/token/SectionTitleLine'
+import Tabs from './token/tokentabs'
 import { getPageTitle } from '../config'
 import LineChartComponent from '../components/LineChart'
+import { useRouter } from 'next/router'
+import WhaleService from '../core/service/whale.service'
+import LoadingBlock from '../components/ui/LoadingBlock'
+import CardBox from '../components/ui/CardBox'
+import BaseButton from '../components/ui/BaseButton'
+import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
 
-const Dashboard = () => {
-  const { clients } = useSampleClients()
-  const { transactions } = useSampleTransactions()
+const TokenPage = () => {
+  const router = useRouter()
+  const { adr } = router.query
 
-  const clientsListed = clients.slice(0, 4)
+  const [whaleData, setWhaleData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const [chartData, setChartData] = useState(sampleChartData())
-
-  const fillChartData = (e: React.MouseEvent) => {
-    e.preventDefault()
-
-    setChartData(sampleChartData())
+  const loadWhale = () => {
+    setLoading(true)
+    WhaleService.getWhale({
+      adr: adr,
+    }).then(
+      (result) => {
+        setLoading(false)
+        console.log(result)
+        setWhaleData(result.whale)
+      },
+      (error) => {
+        setLoading(false)
+        console.log(error)
+      }
+    )
   }
+
+  useEffect(() => {
+    console.log('userEffect in list whales now')
+    setTimeout(() => {
+      // loadWhale()
+      setLoading(false)
+    }, 500)
+  }, [])
 
   return (
     <>
       <Head>
-        <title>{getPageTitle('Dashboard')}</title>
+        <title>{getPageTitle('Token')}</title>
       </Head>
-      <SectionMain>
-        <SectionTitleLineWithButton icon={mdiChartTimelineVariant} title="Overview" main>
-          <BaseButton
-            href="https://github.com/justboil/admin-one-react-tailwind"
-            target="_blank"
-            icon={mdiGithub}
-            label="Star on GitHub"
-            color="contrast"
-            roundedFull
-            small
-          />
-        </SectionTitleLineWithButton>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-          <CardBoxWidget
-            trendLabel="12%"
-            trendType="up"
-            trendColor="success"
-            icon={mdiAccountMultiple}
-            iconColor="success"
-            number={512}
-            label="Clients"
-          />
-          <CardBoxWidget
-            trendLabel="16%"
-            trendType="down"
-            trendColor="danger"
-            icon={mdiCartOutline}
-            iconColor="info"
-            number={7770}
-            numberPrefix="$"
-            label="Sales"
-          />
-          <CardBoxWidget
-            trendLabel="Overflow"
-            trendType="warning"
-            trendColor="warning"
-            icon={mdiChartTimelineVariant}
-            iconColor="danger"
-            number={256}
-            numberSuffix="%"
-            label="Performance"
-          />
-        </div>
+      {loading && <LoadingBlock />}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="flex flex-col justify-between">
-            {transactions.map((transaction: Transaction) => (
-              <CardBoxTransaction key={transaction.id} transaction={transaction} />
-            ))}
-          </div>
-          <div className="flex flex-col justify-between">
-            {clientsListed.map((client: Client) => (
-              <CardBoxClient key={client.id} client={client} />
-            ))}
-          </div>
-        </div>
+      {!loading && (
+        <SectionMain>
+          <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Project of week" />
 
-        <div className="my-6">
-          <SectionBannerStarOnGitHub />
-        </div>
+          <SectionTitleLine icon={mdiSharkFin} title={''} main>
+            <div className="w-32">
+              <div>
+                <BaseButton label="Buy Now" color="success" className="" />
 
-        <SectionTitleLineWithButton icon={mdiChartPie} title="Trends overview">
-          <BaseButton icon={mdiReload} color="whiteDark" onClick={fillChartData} />
-        </SectionTitleLineWithButton>
+                <BaseButton label="Share" color="info" className="ml-2" />
+              </div>
+            </div>
+          </SectionTitleLine>
 
-        {/* <CardBox className="mb-6">{chartData && <ChartLineSample data={chartData} />}</CardBox> */}
-        <CardBox className="mb-6 h-200">
-          {<LineChartComponent />}
-        </CardBox>
-
-        <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Clients" />
-
-        <NotificationBar color="info" icon={mdiMonitorCellphone}>
-          <b>Responsive table.</b> Collapses on mobile
-        </NotificationBar>
-
-        <CardBox hasTable>
-          <TableSampleClients />
-        </CardBox>
-      </SectionMain>
+          <Tabs color="pink" />
+        </SectionMain>
+      )}
     </>
   )
 }
 
-Dashboard.getLayout = function getLayout(page: ReactElement) {
+TokenPage.getLayout = function getLayout(page: ReactElement) {
   return <LayoutAuthenticated>{page}</LayoutAuthenticated>
 }
 
-export default Dashboard
+export default TokenPage

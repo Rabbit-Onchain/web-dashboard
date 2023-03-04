@@ -25,7 +25,7 @@ import { sampleChartData } from '../components/ChartLineSample/config'
 import ChartLineSample from '../components/ChartLineSample'
 import NotificationBar from '../components/ui/NotificationBar'
 import TableSampleClients from '../components/partials/TableSampleClients'
-import WhaleList from '../components/Whales/List'
+import WhaleList from '../components/partials/whales/List'
 import { getPageTitle } from '../config'
 
 const Whales = () => {

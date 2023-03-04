@@ -25,11 +25,11 @@ export default function SectionTitleLine({ icon, title, main = false, children }
           <div className='flex flex-col  justify-start'>
         <div className="flex items-center justify-start">
           
-          <h1 className={`leading-tight text-2xl'`}>{title}</h1><BaseButton icon={mdiContentCopy} className="mr-2" size="50" />
+          <h1 className={`leading-tight text-2xl'`}>{title}</h1><BaseButton icon={mdiContentCopy} className="mr-2" />
         </div>
 
         <div className='mt-2'>
-          <PillTag label="50 Days" icon={mdiCheckDecagram} />
+          <PillTag label="50 Days" color='info' icon={mdiCheckDecagram} />
         </div>
 
         <div className="flex items-center justify-start mt-4">

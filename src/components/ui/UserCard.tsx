@@ -35,10 +35,10 @@ const UserCard = ({ className }: Props) => {
             </Formik>
           </div>
           <h1 className="text-2xl">
-            Howdy, <b>{userName}</b>!
+            Howdy, <b>{userName &&  userName} {!userName && 'Guest'}</b>!
           </h1>
           <p>
-            Last login <b>12 mins ago</b> from <b>127.0.0.1</b>
+            Last login <b>12 mins ago</b> from <b>172.14.17.15</b>
           </p>
           <div className="flex justify-center md:block">
             <PillTag label="Verified" color="info" icon={mdiCheckDecagram} />

@@ -4,20 +4,14 @@ import {
   mdiFormTextboxPassword,
   mdiGithub,
   mdiMail,
+  mdiMonitorCellphone,
   mdiUpload,
 } from '@mdi/js'
 import { Formik, Form, Field } from 'formik'
 import Head from 'next/head'
 import type { ReactElement } from 'react'
 import React, { useState, useEffect } from 'react'
-import BaseButton from '../components/ui/BaseButton'
-import BaseButtons from '../components/ui/BaseButtons'
-import BaseDivider from '../components/ui/BaseDivider'
 import CardBox from '../components/ui/CardBox'
-import CardBoxComponentBody from '../components/ui/CardBoxComponentBody'
-import CardBoxComponentFooter from '../components/ui/CardBoxComponentFooter'
-import FormField from '../components/ui/FormField'
-import FormFilePicker from '../components/ui/FormFilePicker'
 import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/partials/SectionMain'
 import SectionTitleLineWithButton from '../components/ui/SectionTitleLineWithButton'
@@ -26,8 +20,12 @@ import type { UserForm } from '../interfaces'
 import { getPageTitle } from '../config'
 import { useAppSelector } from '../stores/hooks'
 import UserNft from '../components/ui/UserNft'
+import { getQueryVariable } from '../core/util'
+import NotificationBar from '../components/ui/NotificationBar'
 
 const MyProfilePage = () => {
+  const [newNft, setNewNft] = useState(false)
+
   const userName = useAppSelector((state) => state.main.userName)
   const userEmail = useAppSelector((state) => state.main.userEmail)
 
@@ -56,8 +54,14 @@ const MyProfilePage = () => {
       )
     }, 1000)
     setLoading(false)
-    // }
   }
+  useEffect(() => {
+    getUserNFTS()
+    if (getQueryVariable('transactionHashes')) {
+      setNewNft(true)
+    }
+  }, [])
+
   useEffect(() => {
     getUserNFTS()
   }, [userName, loading])
@@ -74,6 +78,19 @@ const MyProfilePage = () => {
           title="My Profile"
           main
         ></SectionTitleLineWithButton>
+
+        {newNft && (
+          <NotificationBar color="warning" icon={mdiMonitorCellphone}>
+            Congratulations ! You've got a new NFT, we wish you enjoy with RabbitOnChain.
+          </NotificationBar>
+        )}
+
+        <SectionTitleLineWithButton
+          icon={mdiAccount}
+          title="My Profile"
+          main
+        ></SectionTitleLineWithButton>
+
         <UserCard className="mb-6" />
         <SectionTitleLineWithButton icon={mdiAccount} title="My NFTs"></SectionTitleLineWithButton>
         {!loading && (
@@ -87,10 +104,12 @@ const MyProfilePage = () => {
             </div>
           </CardBox>
         )}
+
         <SectionTitleLineWithButton
           icon={mdiAccount}
           title="My Whale Followings"
         ></SectionTitleLineWithButton>
+
         <CardBox>
           <div className="items-center text-center grid grid-cols-1 gap-y-4 gap-x-2 md:grid-cols-4 lg:grid-cols-12">
             <div className="col-span-1 md:col-span-2 lg:col-span-3">
@@ -115,7 +134,7 @@ const MyProfilePage = () => {
                     className="h-24 w-full shadow-lg rounded-full shadow-lg"
                   />
                 </div>
-                <div className="text-sm font-bold">0x2a82…3a26</div>
+                <div className="text-sm font-bold">0x2a82…3a27</div>
               </div>
             </div>
 
@@ -128,7 +147,7 @@ const MyProfilePage = () => {
                     className="h-24 w-full shadow-lg rounded-full shadow-lg"
                   />
                 </div>
-                <div className="text-sm font-bold">0x2a82…3a26</div>
+                <div className="text-sm font-bold">0x2a82…3a99</div>
               </div>
             </div>
           </div>

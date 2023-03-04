@@ -13,6 +13,7 @@ type Props = {
 }
 
 export default function AsideMenuLayer({ menu, className = '', ...props }: Props) {
+  const userName = useAppSelector((state) => state.main.userName)
   const asideStyle = useAppSelector((state) => state.style.asideStyle)
   const asideBrandStyle = useAppSelector((state) => state.style.asideBrandStyle)
   const asideScrollbarsStyle = useAppSelector((state) => state.style.asideScrollbarsStyle)
@@ -41,7 +42,7 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
           className={`flex flex-row h-14 items-center justify-between dark:bg-slate-900 ${asideBrandStyle}`}
         >
           <div className="text-center flex justify-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0 mt-4">
-            <img style={{maxWidth: "60%"}} src="/static/images/logo1.png" />
+            <img style={{maxWidth: "60%"}} src="/static/images/RO_logo_nensang.png" />
           </div>
           <button
             className="hidden lg:inline-block xl:hidden p-3"
@@ -58,9 +59,10 @@ export default function AsideMenuLayer({ menu, className = '', ...props }: Props
         >
           <AsideMenuList menu={menu} />
         </div>
-        <ul>
+        {/* {userName &&  <ul>
           <AsideMenuItem item={logoutItem} />
-        </ul>
+        </ul> } */}
+        
       </div>
     </aside>
   )

@@ -7,7 +7,7 @@ export default function Pagination({
   setCurrentPage,
   currentPage,
 }) {
-  let pagesToShow = [];
+  const pagesToShow = [];
 
   for (let i = (currentPage - 2); i <= (currentPage + 2); i++ ) {
     if (i < totalPages && i >= 0) {

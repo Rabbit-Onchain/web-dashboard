@@ -1,6 +1,4 @@
-export default function LoadingBlock({
-
-}) {
+export default function LoadingBlock() {
     return (
         <div className=" shadow rounded-md p-4 w-full mx-auto">
             <div className="animate-pulse flex space-x-4">
@@ -18,4 +16,4 @@ export default function LoadingBlock({
             </div>
         </div>
     );
-};
+}

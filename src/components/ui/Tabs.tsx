@@ -3,7 +3,9 @@ import CardBoxWhaleAsset from "../partials/profile/CardBoxWhaleAsset";
 import CardBox from "./CardBox";
 import { truncateAddr, to$ } from '../../core/util'
 
-export default function({ color, data }) {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const Tabs = ({ color, data }) => {
   const [openTab, setOpenTab] = React.useState(1);
   return (
     <>
@@ -37,7 +39,7 @@ export default function({ color, data }) {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 2
-                    ? "text-white bg-" + color + "-600 bg-pink-600 hover:bg-cyan-600"
+                    ? "text-white bg-" + color + "-600 bg-pink-600 "
                     : "text-" + color + "-600 bg-white")
                 }
                 onClick={e => {
@@ -156,4 +158,6 @@ export default function({ color, data }) {
       </div>
     </>
   );
-};
+}
+
+export default Tabs
