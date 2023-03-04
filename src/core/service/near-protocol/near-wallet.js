@@ -35,7 +35,6 @@ export class Wallet {
 
   // To be called when the website loads
   async startUp() {
-    console.log("LedgerIconUrl:", LedgerIconUrl)
     this.walletSelector = await setupWalletSelector({
       network: this.network,
       modules: [setupMyNearWallet({ iconUrl: MyNearIconUrl || "" }),
@@ -55,7 +54,6 @@ export class Wallet {
   // Sign-in method
   signIn() {
     const description = 'Please select a wallet to sign in.';
-    console.log("this.walletSelector:", this.walletSelector)
     const modal = setupModal(this.walletSelector, { contractId: this.createAccessKeyFor, description });
     modal.show();
   }
@@ -69,7 +67,6 @@ export class Wallet {
 
   // Make a read-only call to retrieve information from the network
   async viewMethod({ contractId, method, args = {} }) {
-    // console.log("this.walletSelector:", this.walletSelector)
     const { network } = this.walletSelector.options;
     const provider = new providers.JsonRpcProvider({ url: network.nodeUrl });
 

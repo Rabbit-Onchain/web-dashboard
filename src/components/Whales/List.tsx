@@ -23,7 +23,6 @@ const WhaleList = () => {
       .then(
         (result) => {
           setLoading(false)
-          console.log(result)
           setWhaleData(result.whales)
           setNumPages(result.totalPage)
         },

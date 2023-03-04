@@ -29,31 +29,39 @@ import UserNft from '../components/ui/UserNft'
 
 const MyProfilePage = () => {
   const userName = useAppSelector((state) => state.main.userName)
-  console.log('userName1:', userName)
   const userEmail = useAppSelector((state) => state.main.userEmail)
+
   const [userNfts, setUserNfts] = useState([])
+  const [loading, setLoading] = useState(true)
+
   const userForm: UserForm = {
     name: userName,
     email: userEmail,
   }
 
-  const getUserNFTS = async () => {
-    console.log('Done')
-    console.log('userName:', userName)
-    if (userName) {
-      // TODO: get all nfts of user
-      let rs = await window['rabbitNft'].getUserNfts(userName)
-      console.log('rs buyNft: ', rs)
-      if (rs && rs.length > 0) {
-        setUserNfts(rs)
-      }
-    }
+  const getUserNFTS = () => {
+    // if (userName) {
+    setLoading(true)
+    // TODO: get all nfts of user
+    setTimeout(() => {
+      window['rabbitNft'].getUserNfts(userName).then(
+        (result) => {
+          if (result && result.length > 0) {
+            setUserNfts(result)
+          }
+        },
+        (error) => {
+          setLoading(false)
+        }
+      )
+    }, 1000)
+    setLoading(false)
+    // }
   }
   useEffect(() => {
-    console.log('useEffect đã chạy')
     getUserNFTS()
-  }, [])
-  console.log('userNfts:', userNfts)
+  }, [userName, loading])
+
   return (
     <>
       <Head>
@@ -66,26 +74,23 @@ const MyProfilePage = () => {
           title="My Profile"
           main
         ></SectionTitleLineWithButton>
-
         <UserCard className="mb-6" />
-
         <SectionTitleLineWithButton icon={mdiAccount} title="My NFTs"></SectionTitleLineWithButton>
-
-        <CardBox>
-          <div className="items-center text-center grid grid-cols-1 gap-y-4 gap-x-2 md:grid-cols-4 lg:grid-cols-12">
-            <>
-              {userNfts.map((userNft) => (
-                <UserNft key={userNft.token_id} userNft={userNft} />
-              ))}
-            </>
-          </div>
-        </CardBox>
-
+        {!loading && (
+          <CardBox>
+            <div className="items-center text-center grid grid-cols-1 gap-y-4 gap-x-2 md:grid-cols-4 lg:grid-cols-12">
+              <>
+                {userNfts.map((userNft) => (
+                  <UserNft key={userNft.token_id} userNft={userNft} />
+                ))}
+              </>
+            </div>
+          </CardBox>
+        )}
         <SectionTitleLineWithButton
           icon={mdiAccount}
           title="My Whale Followings"
         ></SectionTitleLineWithButton>
-
         <CardBox>
           <div className="items-center text-center grid grid-cols-1 gap-y-4 gap-x-2 md:grid-cols-4 lg:grid-cols-12">
             <div className="col-span-1 md:col-span-2 lg:col-span-3">

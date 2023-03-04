@@ -61,7 +61,6 @@ export default function NavBarItem({ item }: Props) {
   useEffect(() => {
     const initConnectWallet = async () => {
       let newWallet = await new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS })
-      console.log(newWallet)
       setWallet(newWallet)
       window['rabbitNft'] = new RabbitNft({
         contractId: CONTRACT_ADDRESS,
@@ -73,7 +72,6 @@ export default function NavBarItem({ item }: Props) {
         // signedInFlow();
         setIsLogin(true)
       }
-      console.log("wallet:", wallet)
     }
     initConnectWallet()
   }, [isLogin])
@@ -90,7 +88,6 @@ export default function NavBarItem({ item }: Props) {
     }
   })
   const handleLogOutClick = () => {
-    console.log("Signout")
     wallet.signOut();
     setIsLogin(false)
   }
