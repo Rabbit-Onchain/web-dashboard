@@ -13,6 +13,7 @@ import SectionMain from '../components/partials/SectionMain'
 import SectionTitleLine from '../components/partials/token/SectionTitleLine'
 import Tabs from './token/tokentabs'
 import { getPageTitle } from '../config'
+import LineChartComponent from '../components/LineChart'
 import { useRouter } from 'next/router'
 import WhaleService from '../core/service/whale.service'
 import LoadingBlock from '../components/ui/LoadingBlock'
@@ -26,31 +27,30 @@ const TokenPage = () => {
 
   const [whaleData, setWhaleData] = useState(null)
   const [loading, setLoading] = useState(true)
-  
+
   const loadWhale = () => {
     setLoading(true)
     WhaleService.getWhale({
-      adr: adr
-    })
-      .then(
-        (result) => {
-          setLoading(false)
-          console.log(result)
-          setWhaleData(result.whale) 
-        },
-        (error) => {
-          setLoading(false)
-          console.log(error);
-        }
-      )
-  };
+      adr: adr,
+    }).then(
+      (result) => {
+        setLoading(false)
+        console.log(result)
+        setWhaleData(result.whale)
+      },
+      (error) => {
+        setLoading(false)
+        console.log(error)
+      }
+    )
+  }
 
   useEffect(() => {
-    console.log('userEffect in list whales now');
+    console.log('userEffect in list whales now')
     setTimeout(() => {
       // loadWhale()
       setLoading(false)
-    }, 500);
+    }, 500)
   }, [])
 
   return (
@@ -59,34 +59,25 @@ const TokenPage = () => {
         <title>{getPageTitle('Token')}</title>
       </Head>
 
-      {loading && <LoadingBlock /> }
+      {loading && <LoadingBlock />}
 
-      {!loading && 
-
+      {!loading && (
         <SectionMain>
           <SectionTitleLineWithButton icon={mdiAccountMultiple} title="Project of week" />
 
           <SectionTitleLine icon={mdiSharkFin} title={''} main>
-            <div className='w-32'>
+            <div className="w-32">
               <div>
-                  <BaseButton
-                      label="Buy Now"
-                      color="success"
-                      className=''
-                    />
+                <BaseButton label="Buy Now" color="success" className="" />
 
-                  <BaseButton
-                      label="Share"
-                      color="info"
-                      className='ml-2'
-                    />
+                <BaseButton label="Share" color="info" className="ml-2" />
               </div>
             </div>
           </SectionTitleLine>
 
-            <Tabs color="pink" />
+          <Tabs color="pink" />
         </SectionMain>
-      }
+      )}
     </>
   )
 }
